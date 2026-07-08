@@ -1,0 +1,25 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/pochientsai/.agents/hooks/patch-chrome-devtools-mcp.sh'",
+            "timeout": 3
+          },
+          {
+            "type": "command",
+            "command": "bash '/Users/pochientsai/.agents/hooks/patch-playwright-mcp.sh'",
+            "timeout": 3
+          },
+          {
+            "type": "command",
+            "command": "bash '/Users/pochientsai/.agents/hooks/drift-check.sh'",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
