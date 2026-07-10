@@ -11,5 +11,6 @@
 !prompts/
 !prompts/**
 # 明確永不追蹤（即使日後放寬 allowlist）：
-# config.toml — 含明文 API key（externalization 前不得入版控）
+# stitch.env — 明文 secret（chmod 600；config.toml 以 env_http_headers 引用其 env var 名）
+# config.toml — key 已外部化後仍不追蹤：marketplaces 區塊為 app 自管 state（高頻改寫）
 # auth.json / *.sqlite / history.jsonl / log/ / sessions/ — 憑證與 runtime state
