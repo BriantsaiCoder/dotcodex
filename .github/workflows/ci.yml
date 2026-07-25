@@ -33,9 +33,11 @@ jobs:
       # 2026-07-25 Copilot review 發現：hooks.json 兩處硬編碼 /Users/pochientsai/…。
       # 本 repo 的用途是異地備份供還原，換機時使用者名稱不同會讓 guard 與
       # drift 偵測靜默失效。這條把它變成機械攔截。
+      # /home/[^/] 而非 /home/[a-z]：字元類只匹配小寫字母會漏掉 /home/_user、
+      # /home/9user 等合法使用者名，讓這條閘達不到「無硬編碼家目錄」的目的。
       - name: 無硬編碼家目錄路徑
         run: |
-          if grep -rn -e '/Users/' -e '/home/[a-z]' hooks.json hooks/ agents/; then
+          if grep -rn -e '/Users/' -e '/home/[^/]' hooks.json hooks/ agents/; then
             echo "::error::發現硬編碼家目錄路徑，請改用 \$HOME"
             exit 1
           fi
