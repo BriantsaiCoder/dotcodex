@@ -10,6 +10,8 @@
 !agents/*.toml
 !prompts/
 !prompts/**
+!.github/
+!.github/**
 # .DS_Store 是 Finder state 非設定；必須放在 ! 規則之後才蓋得掉 !hooks/** 的誤收
 .DS_Store
 # 明確永不追蹤（即使日後放寬 allowlist）：
