@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # hooks.json 是 Codex 載入 PreToolUse / SessionStart 的唯一入口；
+      # 語法壞掉會讓 [T0-3] 的 guard 靜默不掛載。
+      - name: hooks.json JSON 合法
+        run: jq -e . hooks.json > /dev/null
+
+      - name: agent TOML 可解析
+        run: |
+          for f in agents/*.toml; do
+            python3 -c "import tomllib,sys; tomllib.load(open(sys.argv[1],'rb'))" "$f" \
+              || { echo "::error file=$f::TOML 解析失敗"; exit 1; }
+          done
+
+      # 2026-07-25 Copilot review 發現：hooks.json 兩處硬編碼 /Users/pochientsai/…。
+      # 本 repo 的用途是異地備份供還原，換機時使用者名稱不同會讓 guard 與
+      # drift 偵測靜默失效。這條把它變成機械攔截。
+      - name: 無硬編碼家目錄路徑
+        run: |
+          if grep -rn -e '/Users/' -e '/home/[a-z]' hooks.json hooks/ agents/; then
+            echo "::error::發現硬編碼家目錄路徑，請改用 \$HOME"
+            exit 1
+          fi
+
+      # hooks/ 內是實際執行的 shell；-S error 只抓確定性 bug
+      - name: shellcheck（hooks）
+        run: shellcheck -S error hooks/*.sh
+
+      # .gitignore 是 allowlist 模式（* 後逐項 ! 核准）。追蹤面一旦擴大就可能
+      # 把 auth.json / stitch.env / config.toml 等憑證與 runtime state 收進版控。
+      - name: 追蹤面未擴大（憑證與 runtime state 不得入版控）
+        run: |
+          rc=0
+          for f in auth.json stitch.env config.toml history.jsonl installation_id; do
+            if git ls-files --error-unmatch "$f" > /dev/null 2>&1; then
+              echo "::error file=$f::敏感檔被追蹤——.gitignore allowlist 被放寬了"
+              rc=1
+            fi
+          done
+          exit $rc
