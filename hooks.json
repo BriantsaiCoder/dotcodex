@@ -1,12 +1,24 @@
 {
   "hooks": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "bash \"$HOME/.agents/hooks/guard-codex-git-push.sh\"",
+            "timeout": 10,
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [
           {
-            "type": "command",
-            "command": "bash '/Users/pochientsai/.agents/hooks/drift-check.sh'",
-            "timeout": 10
+            "command": "bash \"$HOME/.agents/hooks/drift-check.sh\"",
+            "timeout": 10,
+            "type": "command"
           }
         ]
       }

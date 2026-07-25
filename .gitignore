@@ -10,6 +10,8 @@
 !agents/*.toml
 !prompts/
 !prompts/**
+# .DS_Store 是 Finder state 非設定；必須放在 ! 規則之後才蓋得掉 !hooks/** 的誤收
+.DS_Store
 # 明確永不追蹤（即使日後放寬 allowlist）：
 # stitch.env — 明文 secret（chmod 600；config.toml 以 env_http_headers 引用其 env var 名）
 # config.toml — key 已外部化後仍不追蹤：marketplaces 區塊為 app 自管 state（高頻改寫）
