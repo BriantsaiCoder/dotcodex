@@ -4,7 +4,7 @@
       {
         "hooks": [
           {
-            "command": "bash '/Users/pochientsai/.agents/hooks/guard-codex-git-push.sh'",
+            "command": "bash \"$HOME/.agents/hooks/guard-codex-git-push.sh\"",
             "timeout": 10,
             "type": "command"
           }
@@ -16,7 +16,7 @@
       {
         "hooks": [
           {
-            "command": "bash '/Users/pochientsai/.agents/hooks/drift-check.sh'",
+            "command": "bash \"$HOME/.agents/hooks/drift-check.sh\"",
             "timeout": 10,
             "type": "command"
           }
