@@ -6,6 +6,10 @@
 !hooks.json
 !hooks/
 !hooks/**
+!rules/
+!rules/**
+!tests/
+!tests/**
 !agents/
 !agents/*.toml
 !prompts/

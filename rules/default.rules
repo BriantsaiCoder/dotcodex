@@ -1,0 +1,57 @@
+prefix_rule(pattern=["dotnet", "test"], decision="allow")
+prefix_rule(pattern=["dotnet", "build"], decision="allow")
+prefix_rule(pattern=["codex", "mcp", "login"], decision="allow")
+
+# [T0-3] unified_exec may bypass PreToolUse(Bash); block canonical unsafe forms
+# in Codex's native exec policy as defense in depth.
+prefix_rule(
+    pattern=["git", "push", ["--force", "-f"]],
+    decision="forbidden",
+    justification="Use --force-with-lease on a non-protected branch; never force-push main/master.",
+    match=[
+        "git push --force origin feat/unsafe",
+        "git push -f origin feat/unsafe",
+    ],
+    not_match=[
+        "git push --force-with-lease origin feat/safe",
+        "git push origin main",
+    ],
+)
+
+prefix_rule(
+    pattern=[
+        "git",
+        "push",
+        "--force-with-lease",
+        ["origin", "upstream"],
+        ["main", "master", "refs/heads/main", "refs/heads/master", "HEAD:main", "HEAD:master", "HEAD:refs/heads/main", "HEAD:refs/heads/master"],
+    ],
+    decision="forbidden",
+    justification="Never force-push main/master; use a feature branch.",
+    match=[
+        "git push --force-with-lease origin main",
+        "git push --force-with-lease upstream HEAD:refs/heads/master",
+    ],
+    not_match=[
+        "git push --force-with-lease origin feat/safe",
+    ],
+)
+
+prefix_rule(
+    pattern=[
+        "git",
+        "push",
+        ["origin", "upstream"],
+        ["main", "master", "refs/heads/main", "refs/heads/master", "HEAD:main", "HEAD:master", "HEAD:refs/heads/main", "HEAD:refs/heads/master"],
+        ["--force", "-f", "--force-with-lease"],
+    ],
+    decision="forbidden",
+    justification="Never force-push main/master; use a feature branch.",
+    match=[
+        "git push origin main --force",
+        "git push upstream master --force-with-lease",
+    ],
+    not_match=[
+        "git push origin main",
+    ],
+)
