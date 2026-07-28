@@ -32,4 +32,18 @@ for rule in cookbook cpp dotnet frontend-spa infra testing typescript winforms; 
   [ -f "rules/$rule.md" ] || fail "local stack rule missing: rules/$rule.md"
 done
 
+bytes=$(wc -c < AGENTS.md | tr -d ' ')
+[ "$bytes" -le 7000 ] || fail "AGENTS.md exceeds thin budget: ${bytes}B"
+
+for marker in dev-workflow S4 S5 S6 grilling domain-modeling implement tdd diagnosing-bugs code-review codebase-design; do
+  rg -q "$marker" AGENTS.md || fail "thin route missing: $marker"
+done
+
+rg -q '~/.agents/skills/dev-workflow/SKILL\.md' AGENTS.md ||
+  fail 'shared dev-workflow route missing'
+
+if rg -q '^# tier[12]|superpowers:|mp-(diagnose|grill-with-docs|improve-codebase-architecture|tdd)' AGENTS.md; then
+  fail 'AGENTS.md still contains legacy/non-thin workflow'
+fi
+
 printf 'PASS: Codex global config ownership\n'
