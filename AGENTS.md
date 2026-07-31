@@ -24,41 +24,14 @@ Repo 層對 tier0 只可加嚴；只有 user 當下明示可放鬆。衝突引�
 
 ## Shared Matt workflow
 
-任何開發任務先讀 `~/.agents/skills/dev-workflow/SKILL.md`；本檔只保留 routing／governance／Codex adapter。
-
-- 需求／domain：`grilling` + `domain-modeling`。
-- Spec／tickets／長期決策：`to-spec`、`to-tickets`、`wayfinder`。
-- Implementation／TDD：`implement` + `tdd`；先建 isolated worktree，禁止 current/main commit。
-- Diagnosis／review／architecture：`diagnosing-bugs`、`code-review`、`codebase-design`。
-- 陌生 repo／小需求：`acquire-codebase-knowledge`、`sdd`。
-
-### Authorization
-
-- 命中 [T0-8] 停在 plan gate；模糊時套 [T0-5]。
-- Bugfix 或既有 behavior change 必須 RED regression test → minimal fix → GREEN；無 seam 明標例外。
-- 高扇入共用介面先列 callers；中高風險附 before／after baseline。
-- Delegation 需 user／repo／higher instruction 授權、scope 不重疊，且 main context 重驗。
-
-### S4 VERIFY
-
-Build／test／lint 與 task-specific probes 全跑；會部署另跑 release verification + dependency security scan。Evidence 必須含命令與 exit code。
-
-### S5 REVIEW
-
-用 `code-review` 分開跑 Standards／Spec；各軸標 PASS／FAIL／SKIPPED／UNAVAILABLE。Actionable findings 歸零才能前進。
-
-### S6 CLOSEOUT
-
-S4、S5 全綠後才可 commit／push／open PR／merge／final closeout；merge 前 CI 綠並處理 bot review。BUGFIX 另跑 `bug-fix-settlement`。
-
-Ready PR 建立後 task 保持 active；其後任何 push 都使前次 CI 與 bot review gate 失效，須以 `bin/pr-review-gate <PR>` 對 current HEAD 重查至 PASS 才可提示 Squash merge，非 PASS 只標 WAITING／FAIL／UNAVAILABLE 並附證據。
+任何開發任務 MUST 先讀 `~/.agents/skills/dev-workflow/SKILL.md`；routing、authorization、RED→GREEN、S4–S6 與 PR gate 的程序只由該 skill 維護，本檔不重複。
 
 ## Codex adapter
 
 - 預設 zh-TW；technical terms 保留 English。
 - 回覆 SHOULD outcome-first、無空泛前後文；決策列編號選項／推薦／取捨，單字或數字即為完整回答，推測標記，已決不列替案。
 - plan = Plan Mode；todo = update_plan；子代理 = spawn_agent／wait_agent。
-- Shared checkout 或 branch switch 影響 live skills 時，用 `bin/agents-branch` 建 isolated worktree。
+- Shared checkout 或 branch switch 影響 live skills 時，用 `~/.agents/bin/agents-branch` 建 isolated worktree。
 - `~/.codex/hooks.json` Git guard + `~/.codex/rules/default.rules` 疊加防線，不能取代 Tier 0／CI。
 - PR 預設 Ready for review；未明示 Draft 不得建立 Draft。
 - Secrets 只回報 set／unset；不得印 config／credential body。
@@ -66,3 +39,7 @@ Ready PR 建立後 task 保持 active；其後任何 push 都使前次 CI 與 bo
 ## On-demand stack rules
 
 `~/.codex/rules/<stack>.md`：dotnet、typescript、frontend-spa、winforms、cpp、testing、infra、cookbook。
+
+## Current documentation
+
+Library／framework／SDK／API／CLI／cloud service 的 syntax、configuration、migration、library-specific debugging 與 setup MUST route to `context7-mcp`；resolve/query procedure 只由該 skill 維護。Refactoring、from-scratch scripts、business-logic debugging、code review 與 general concepts 不觸發。

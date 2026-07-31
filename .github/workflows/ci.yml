@@ -30,6 +30,9 @@ jobs:
               || { echo "::error file=$f::TOML 解析失敗"; exit 1; }
           done
 
+      - name: global config ownership
+        run: bash tests/global-config-ownership.sh
+
       # 2026-07-25 Copilot review 發現：hooks.json 兩處硬編碼 /Users/pochientsai/…。
       # 本 repo 的用途是異地備份供還原，換機時使用者名稱不同會讓 guard 與
       # drift 偵測靜默失效。這條把它變成機械攔截。
