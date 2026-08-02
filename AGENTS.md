@@ -31,6 +31,7 @@ Repo 層對 tier0 只可加嚴；只有 user 當下明示可放鬆。衝突引�
 - 預設 zh-TW；technical terms 保留 English。
 - 回覆 SHOULD outcome-first、無空泛前後文；決策列編號選項／推薦／取捨，單字或數字即為完整回答，推測標記，已決不列替案。
 - plan = Plan Mode；todo = update_plan；子代理 = spawn_agent／wait_agent。
+- Delegation 依 shared `dev-workflow` [INT-4]：無條件約束（可獨立平行、寫入 ownership 不重疊、main context 重驗）不因任何授權而放寬；滿足約束且併發 ≤2、單階段累計 ≤6 時自主判定並直接執行，不必先問；超出上界才回到明示授權。
 - Shared checkout 或 branch switch 影響 live skills 時，用 `~/.agents/bin/agents-branch` 建 isolated worktree。
 - `~/.codex/hooks.json` Git guard + `~/.codex/rules/default.rules` 疊加防線，不能取代 Tier 0／CI。
 - PR 預設 Ready for review；未明示 Draft 不得建立 Draft。
