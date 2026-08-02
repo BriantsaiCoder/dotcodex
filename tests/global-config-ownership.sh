@@ -34,6 +34,7 @@ done
 
 bytes=$(wc -c < AGENTS.md | tr -d ' ')
 [ "$bytes" -le 5000 ] || fail "AGENTS.md exceeds thin budget: ${bytes}B"
+[ "$bytes" -lt 4500 ] || fail "AGENTS.md must stay below 90% of its 5000B budget: ${bytes}B"
 
 for marker in 'Tier 0 hard rules' dev-workflow 'Codex adapter' context7-mcp; do
   grep -Fq "$marker" AGENTS.md || fail "thin kernel marker missing: $marker"
@@ -41,6 +42,9 @@ done
 
 grep -Eq '~/.agents/skills/dev-workflow/SKILL\.md' AGENTS.md ||
   fail 'shared dev-workflow route missing'
+
+grep -Fqx -- '- Delegation：依 shared `dev-workflow` [INT-4] 由 AI 自主判定，無須另問。' AGENTS.md ||
+  fail 'Codex delegation adapter must stay thin and point to shared INT-4'
 
 if grep -Eq 'resolve-library-id|query-docs|^### S[456]|bin/pr-review-gate' AGENTS.md; then
   fail 'AGENTS.md duplicates skill-owned procedure'
@@ -54,6 +58,29 @@ grep -Eq 'bash tests/global-config-ownership\.sh' .github/workflows/ci.yml ||
 
 if grep -Eq '^# tier[12]|superpowers:|mp-(diagnose|grill-with-docs|improve-codebase-architecture|tdd)' AGENTS.md; then
   fail 'AGENTS.md still contains legacy/non-thin workflow'
+fi
+
+grep -Fq 'blanket authorization' AGENTS.md &&
+  fail 'shared authorization semantics leaked into Codex adapter'
+
+if [ "${CI:-}" = true ] && [ ! -f config.toml ]; then
+  printf 'SKIP: ignored live config.toml is unavailable in CI; local host canary remains mandatory\n'
+elif [ ! -f config.toml ]; then
+  fail 'live config.toml missing; cannot verify Context7 policy'
+elif python3 - "$PWD/config.toml" <<'PY'
+import sys, tomllib
+with open(sys.argv[1], "rb") as f:
+    context7 = tomllib.load(f)["mcp_servers"]["context7"]
+assert context7["enabled"] is True
+assert context7["command"] == "npx"
+assert context7["args"][-1] == "@upstash/context7-mcp@3.2.5"
+assert context7["enabled_tools"] == ["resolve-library-id", "query-docs"]
+assert context7["default_tools_approval_mode"] == "auto"
+PY
+then
+  :
+else
+  fail 'Context7 must be pinned, exact-tool scoped, and auto-approved'
 fi
 
 # CONVENTIONS 規則 11 的 host 一側。必須用 find 不得用 ls + glob：後者在 zsh 下任一目錄
