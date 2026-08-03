@@ -19,8 +19,8 @@ Repo 層對 tier0 只可加嚴；只有 user 當下明示可放鬆。衝突引�
 [T0-5] 模糊時 MUST 停下發問並列假設與影響。觸發：多種合理解讀且將改檔。例外：無。驗證：改檔前有澄清或明示假設。
 [T0-6] Auth／payment／migration／大量刪除／crypto／multi-tenant／rate-limit／deployment pipeline 變更 MUST 附 rollback。觸發：diff 命中任一類。例外：無。驗證：plan／PR 有 rollback。
 [T0-7] DB migration MUST expand→dual-write→backfill→switch-reads→remove-legacy；破壞式 schema 不與 consumer 同 deploy。觸發：schema 變更。例外：停機批次可略 dual-write。驗證：migration plan 分段。
-[T0-8] Plan-first 明示或架構性／中高風險變更 MUST 先出 plan 並取得確認；其他明確 change／build／fix 可直接實作。觸發：命中 gate 且將改檔。例外：無。驗證：plan + 核准原句，或 user 實作原句。
-[T0-9] Merge 前 MUST 綠 CI 且處理 bot review。觸發：merge。例外：無。驗證：checks 綠 + reviews resolved。
+[T0-8] Plan-first 明示或架構性／中高風險變更 MUST 先出 plan 並取得確認；其餘明確的 in-scope change／build／fix 可直接實作並驗證。觸發：命中 gate 且將改檔。例外：無。驗證：plan + 核准原句，或 user 實作原句。
+[T0-9] Merge 前 MUST 綠 CI 且處理 bot review。觸發：merge。例外：無。驗證：checks 綠 + reviews resolved（bot 異步 2–3 分產出，開 PR 當下為空是延遲不是無）。
 
 ## Shared Matt workflow
 
