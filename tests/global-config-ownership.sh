@@ -30,6 +30,19 @@ for file in hooks/guard-codex-git-push.sh hooks/guard-git-push.sh hooks/drift-ch
 done
 grep -Fqx 'set -ufo pipefail' hooks/guard-git-push.sh ||
   fail 'Codex push guard must keep canonical pipefail mode'
+
+push_probe() { # $1=allow|deny $2=command
+  local want="$1" cmd="$2" out actual=allow
+  out=$(jq -nc --arg command "$cmd" '{tool_input:{command:$command},cwd:"."}' |
+    bash hooks/guard-git-push.sh --format=codex)
+  printf '%s' "$out" | jq -e '.hookSpecificOutput.permissionDecision == "deny"' >/dev/null 2>&1 && actual=deny
+  [ "$actual" = "$want" ] || fail "git push guard want=$want got=$actual: $cmd"
+}
+push_probe allow 'git push --all origin'
+push_probe deny  'git push --force --all origin'
+push_probe deny  'git push --force-with-lease --all origin'
+push_probe deny  'git push --mirror origin'
+
 for rule in cookbook cpp dotnet frontend-spa infra testing typescript winforms; do
   [ -f "rules/$rule.md" ] || fail "local stack rule missing: rules/$rule.md"
 done
@@ -42,11 +55,19 @@ for marker in 'Tier 0 hard rules' dev-workflow 'Codex adapter' 'On-demand stack'
   grep -Fq "$marker" AGENTS.md || fail "thin kernel marker missing: $marker"
 done
 
-for id in T0-1 T0-5 T0-7 T0-9; do
+for id in T0-1 T0-5 T0-7 T0-8 T0-9; do
   [ "$(grep -Ec "^\\[$id\\]" AGENTS.md)" -eq 1 ] ||
     fail "[$id] must have exactly one definition"
   grep -Eq "^\\[$id\\].*觸發：.*例外：.*驗證：" AGENTS.md ||
     fail "[$id] must keep directive/trigger/exception/verification on one line"
+done
+
+t08="$(grep -E '^\[T0-8\]' AGENTS.md)"
+for clause in 'plan-first' '架構性' 'High-risk' 'external write' \
+              'destructive／costly／credential／payment／deployment／migration' 'material scope expansion' \
+              'in-scope、local、reversible' 'Low／Medium-risk' 'session plan' \
+              '不需第二次確認' 'protected gate'; do
+  [[ "$t08" == *"$clause"* ]] || fail "[T0-8] semantic clause missing: $clause"
 done
 
 for contract in \
