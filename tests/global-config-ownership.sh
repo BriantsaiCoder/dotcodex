@@ -31,14 +31,35 @@ done
 grep -Fqx 'set -ufo pipefail' hooks/guard-git-push.sh ||
   fail 'Codex push guard must keep canonical pipefail mode'
 
+push_probe_dir="$(mktemp -d)"
+trap 'rm -rf "$push_probe_dir"' EXIT
 push_probe() { # $1=allow|deny $2=command
-  local want="$1" cmd="$2" out actual=allow
-  out=$(jq -nc --arg command "$cmd" '{tool_input:{command:$command},cwd:"."}' |
-    bash hooks/guard-git-push.sh --format=codex)
-  printf '%s' "$out" | jq -e '.hookSpecificOutput.permissionDecision == "deny"' >/dev/null 2>&1 && actual=deny
+  local want="$1" cmd="$2" rc actual
+  if jq -nc --arg command "$cmd" '{tool_input:{command:$command},cwd:"."}' |
+    bash hooks/guard-git-push.sh --format=codex \
+      >"$push_probe_dir/stdout" 2>"$push_probe_dir/stderr"; then
+    rc=0
+  else
+    rc=$?
+  fi
+  if [ "$rc" -eq 0 ] && [ ! -s "$push_probe_dir/stdout" ] &&
+    [ ! -s "$push_probe_dir/stderr" ]; then
+    actual=allow
+  elif [ "$rc" -eq 0 ] && [ ! -s "$push_probe_dir/stderr" ] &&
+    [ -s "$push_probe_dir/stdout" ] &&
+    jq -se '
+      length == 1 and
+      .[0].hookSpecificOutput.permissionDecision == "deny" and
+      (.[0].hookSpecificOutput.permissionDecisionReason | type == "string" and length > 0)
+    ' "$push_probe_dir/stdout" >/dev/null 2>&1; then
+    actual=deny
+  else
+    actual="BADOUTPUT(rc=$rc)"
+  fi
   [ "$actual" = "$want" ] || fail "git push guard want=$want got=$actual: $cmd"
 }
 push_probe allow 'git push --all origin'
+push_probe allow 'git push --multiple origin backup'
 push_probe deny  'git push --force --all origin'
 push_probe deny  'git push --force-with-lease --all origin'
 push_probe deny  'git push --mirror origin'
