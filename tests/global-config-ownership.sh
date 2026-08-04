@@ -36,9 +36,9 @@ done
 
 bytes=$(wc -c < AGENTS.md | tr -d ' ')
 [ "$bytes" -le 5000 ] || fail "AGENTS.md exceeds thin budget: ${bytes}B"
-[ "$bytes" -lt 4750 ] || fail "AGENTS.md must stay below 95% of its 5000B budget: ${bytes}B"
+[ "$bytes" -lt 4500 ] || fail "AGENTS.md must stay below 90% of its 5000B budget: ${bytes}B"
 
-for marker in 'Tier 0 hard rules' dev-workflow 'Codex adapter' context7-mcp; do
+for marker in 'Tier 0 hard rules' dev-workflow 'Codex adapter' 'On-demand stack' context7-mcp; do
   grep -Fq "$marker" AGENTS.md || fail "thin kernel marker missing: $marker"
 done
 

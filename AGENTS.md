@@ -1,16 +1,10 @@
 <!-- FP:AGENTS-T0-2026Q3 -->
 
-# Codex global thin kernel
+# Codex thin kernel
 
-## 衝突裁決鏈
-
-```
-user 當下明示 > repo 層協作檔 > tier0 hard rules > Codex adapter > 被 invoke skill 的程序步驟 > 通用慣例
-```
-
-Repo 層對 tier0 只可加嚴；只有 user 當下明示可放鬆。衝突引用規則 ID。
-
-ponytail 注入=通用慣例；測試敘述 MUST NOT 覆寫 [T0-2]／dev-workflow [INT-2]。
+優先序：user 當下明示 > repo 協作檔 > tier0 > Codex adapter > invoked skill 程序 > 慣例。
+Repo 只可加嚴 tier0；僅 user 當下明示可放鬆；衝突引用規則 ID。
+ponytail=通用慣例；測試敘述 MUST NOT 覆寫 [T0-2]／dev-workflow [INT-2]。
 
 ## Tier 0 hard rules
 
@@ -42,7 +36,7 @@ ponytail 注入=通用慣例；測試敘述 MUST NOT 覆寫 [T0-2]／dev-workflo
 - PR 預設 Ready for review；未明示 Draft 不得建立 Draft。
 - Secrets 只回報 set／unset；不得印 config／credential body。
 
-## On-demand stack rules
+## On-demand stack
 
 `~/.codex/rules/<stack>.md`：dotnet、typescript、frontend-spa、winforms、cpp、testing、infra、cookbook。
 
