@@ -14,13 +14,13 @@ ponytail 注入=通用慣例；測試敘述 MUST NOT 覆寫 [T0-2]／dev-workflo
 
 ## Tier 0 hard rules
 
-[T0-1] MUST NOT 假設未驗證的 file path／API／config key。觸發：引用任何未經 read／ls／rg 確認的路徑或鍵名。例外：無。驗證：引用前有列出／讀取 evidence。
+[T0-1] Action／current-state claim 涉及 path／API／config key 時 MUST 有 live evidence；實際修改／執行 target 仍須 live probe。觸發：前述 action／claim。例外：non-action citation／hypothetical。驗證：read／list／schema probe 或例外標記。
 [T0-2] MUST NOT 無 evidence 宣稱 done。觸發：回報完成但無 test／build／lint／probe。例外：無。驗證：完成宣稱附命令與 exit code。
 [T0-3] MUST NOT force-push main／master；非保護分支只用 `--force-with-lease`。觸發：force push。例外：無。驗證：hook／exec policy／CI guard。
 [T0-4] MUST NOT 把 token／secret 寫入 frontend storage，或在 log／console／chat 印明文。觸發：credential 進儲存或輸出。例外：非敏感值。驗證：gitleaks + set／unset 遮罩。
-[T0-5] 模糊時 MUST 停下發問並列假設與影響。觸發：多種合理解讀且將改檔。例外：無。驗證：改檔前有澄清或明示假設。
+[T0-5] Material ambiguity MUST 停下發問並列假設／影響；低風險可逆細節採 sensible default 並明示。觸發：多種合理解讀會改變 outcome／scope／risk。例外：低風險、可逆、無 material impact。驗證：改檔前有澄清或 default／impact 紀錄。
 [T0-6] Auth／payment／migration／大量刪除／crypto／multi-tenant／rate-limit／deployment pipeline 變更 MUST 附 rollback。觸發：diff 命中任一類。例外：無。驗證：plan／PR 有 rollback。
-[T0-7] DB migration MUST expand→dual-write→backfill→switch-reads→remove-legacy；破壞式 schema 不與 consumer 同 deploy。觸發：schema 變更。例外：停機批次可略 dual-write。驗證：migration plan 分段。
+[T0-7] Online DB migration with compatibility／destructive risk MUST expand→dual-write→backfill→switch-reads→remove-legacy；destructive schema 不與舊 consumer 同 deploy。觸發：schema／data-contract risk。例外：additive／new-object 或停機 batch 可標不適用階段 `SKIPPED`（理由）。驗證：plan 列 phases／consumer boundary／[T0-6] rollback。
 [T0-8] Plan-first 明示或架構性／中高風險變更 MUST 先出 plan 並取得確認；其餘明確的 in-scope change／build／fix 可直接實作並驗證。觸發：命中 gate 且將改檔。例外：無。驗證：plan + 核准原句，或 user 實作原句。
 [T0-9] Merge 前 MUST 綠 CI 且處理 bot review。觸發：merge。例外：無。驗證：checks 綠 + reviews resolved（bot 異步 2–3 分產出，開 PR 當下為空是延遲不是無）。
 
@@ -48,4 +48,4 @@ ponytail 注入=通用慣例；測試敘述 MUST NOT 覆寫 [T0-2]／dev-workflo
 
 ## Current documentation
 
-Library／framework／SDK／API／CLI／cloud service 的 syntax、configuration、migration、library-specific debugging 與 setup MUST route to `context7-mcp`；resolve/query procedure 只由該 skill 維護。Refactoring、from-scratch scripts、business-logic debugging、code review 與 general concepts 不觸發。
+OpenAI／Codex → `openai-docs`；Microsoft／Azure／.NET：concepts → `microsoft-docs`；API／SDK → `microsoft-code-reference`。Third-party current docs → available active-host provider-native official-doc capability；absent／`UNAVAILABLE` 才 `context7-mcp`。Refactor／new script／business-logic debug／review／general concept 不觸發。
