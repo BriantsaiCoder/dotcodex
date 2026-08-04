@@ -22,7 +22,7 @@ ponytail 注入=通用慣例；測試敘述 MUST NOT 覆寫 [T0-2]／dev-workflo
 [T0-6] Auth／payment／migration／大量刪除／crypto／multi-tenant／rate-limit／deployment pipeline 變更 MUST 附 rollback。觸發：diff 命中任一類。例外：無。驗證：plan／PR 有 rollback。
 [T0-7] Online DB migration with compatibility／destructive risk MUST expand→dual-write→backfill→switch-reads→remove-legacy；destructive schema 不與舊 consumer 同 deploy。觸發：schema／data-contract risk。例外：additive／new-object 或停機 batch 可標不適用階段 `SKIPPED`（理由）。驗證：plan 列 phases／consumer boundary／[T0-6] rollback。
 [T0-8] Plan-first 明示或架構性／中高風險變更 MUST 先出 plan 並取得確認；其餘明確的 in-scope change／build／fix 可直接實作並驗證。觸發：命中 gate 且將改檔。例外：無。驗證：plan + 核准原句，或 user 實作原句。
-[T0-9] Merge 前 MUST 綠 CI 且處理 bot review。觸發：merge。例外：無。驗證：checks 綠 + reviews resolved（bot 異步 2–3 分產出，開 PR 當下為空是延遲不是無）。
+[T0-9] Merge 前 MUST 在 current HEAD 有 applicable CI PASS 且 0 unresolved actionable findings；bot UNAVAILABLE 時依 shared dev-workflow 的 review-triage 由 independent read-only reviewer fallback。觸發：merge。例外：無。驗證：current-head CI + review gate PASS。
 
 ## Shared Matt workflow
 
