@@ -28,6 +28,8 @@ jq -e '
 for file in hooks/guard-codex-git-push.sh hooks/guard-git-push.sh hooks/drift-check.sh rules/default.rules; do
   [ -f "$file" ] || fail "local file missing: $file"
 done
+grep -Fqx 'set -ufo pipefail' hooks/guard-git-push.sh ||
+  fail 'Codex push guard must keep canonical pipefail mode'
 for rule in cookbook cpp dotnet frontend-spa infra testing typescript winforms; do
   [ -f "rules/$rule.md" ] || fail "local stack rule missing: rules/$rule.md"
 done
@@ -36,11 +38,11 @@ bytes=$(wc -c < AGENTS.md | tr -d ' ')
 [ "$bytes" -le 5000 ] || fail "AGENTS.md exceeds thin budget: ${bytes}B"
 [ "$bytes" -lt 4500 ] || fail "AGENTS.md must stay below 90% of its 5000B budget: ${bytes}B"
 
-for marker in 'Tier 0 hard rules' dev-workflow 'Codex adapter' context7-mcp; do
+for marker in 'Tier 0 hard rules' dev-workflow 'Codex adapter' 'On-demand stack' context7-mcp; do
   grep -Fq "$marker" AGENTS.md || fail "thin kernel marker missing: $marker"
 done
 
-for id in T0-1 T0-5 T0-7; do
+for id in T0-1 T0-5 T0-7 T0-9; do
   [ "$(grep -Ec "^\\[$id\\]" AGENTS.md)" -eq 1 ] ||
     fail "[$id] must have exactly one definition"
   grep -Eq "^\\[$id\\].*觸發：.*例外：.*驗證：" AGENTS.md ||
@@ -51,6 +53,7 @@ for contract in \
   '[T0-1] Action／current-state claim 涉及 path／API／config key 時 MUST 有 live evidence；實際修改／執行 target 仍須 live probe。觸發：前述 action／claim。例外：non-action citation／hypothetical。驗證：read／list／schema probe 或例外標記。' \
   '[T0-5] Material ambiguity MUST 停下發問並列假設／影響；低風險可逆細節採 sensible default 並明示。觸發：多種合理解讀會改變 outcome／scope／risk。例外：低風險、可逆、無 material impact。驗證：改檔前有澄清或 default／impact 紀錄。' \
   '[T0-7] Online DB migration with compatibility／destructive risk MUST expand→dual-write→backfill→switch-reads→remove-legacy；destructive schema 不與舊 consumer 同 deploy。觸發：schema／data-contract risk。例外：additive／new-object 或停機 batch 可標不適用階段 `SKIPPED`（理由）。驗證：plan 列 phases／consumer boundary／[T0-6] rollback。' \
+  '[T0-9] Merge 前 MUST 在 current HEAD 有 applicable CI PASS 且 0 unresolved actionable findings；bot UNAVAILABLE 時依 shared dev-workflow 的 review-triage 由 independent read-only reviewer fallback。觸發：merge。例外：無。驗證：current-head CI + review gate PASS。' \
   'OpenAI／Codex → `openai-docs`；Microsoft／Azure／.NET：concepts → `microsoft-docs`；API／SDK → `microsoft-code-reference`。Third-party current docs → available active-host provider-native official-doc capability；absent／`UNAVAILABLE` 才 `context7-mcp`。Refactor／new script／business-logic debug／review／general concept 不觸發。'; do
   grep -Fqx "$contract" AGENTS.md || fail "thin kernel contract missing: $contract"
 done
