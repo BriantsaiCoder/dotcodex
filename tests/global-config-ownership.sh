@@ -61,6 +61,7 @@ push_probe() { # $1=allow|deny $2=command
 push_probe allow 'git push --all origin'
 push_probe allow 'git push --multiple origin backup'
 push_probe deny  'git push --force --all origin'
+push_probe deny  '{git,push,--force,origin,main}'
 push_probe deny  'git push --force-with-lease --all origin'
 push_probe deny  'git push --mirror origin'
 
