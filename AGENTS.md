@@ -15,7 +15,7 @@ ponytail=通用慣例；測試敘述 MUST NOT 覆寫 [T0-2]／dev-workflow [INT-
 [T0-5] Material ambiguity MUST 停下發問並列假設／影響；低風險可逆細節採 sensible default 並明示。觸發：多種合理解讀會改變 outcome／scope／risk。例外：低風險、可逆、無 material impact。驗證：改檔前有澄清或 default／impact 紀錄。
 [T0-6] Auth／payment／migration／大量刪除／crypto／multi-tenant／rate-limit／deployment pipeline 變更 MUST 附 rollback。觸發：diff 命中任一類。例外：無。驗證：plan／PR 有 rollback。
 [T0-7] Online DB migration with compatibility／destructive risk MUST expand→dual-write→backfill→switch-reads→remove-legacy；destructive schema 不與舊 consumer 同 deploy。觸發：schema／data-contract risk。例外：additive／new-object 或停機 batch 可標不適用階段 `SKIPPED`（理由）。驗證：plan 列 phases／consumer boundary／[T0-6] rollback。
-[T0-8] Plan-first 明示或架構性／中高風險變更 MUST 先出 plan 並取得確認；其餘明確的 in-scope change／build／fix 可直接實作並驗證。觸發：命中 gate 且將改檔。例外：無。驗證：plan + 核准原句，或 user 實作原句。
+[T0-8] plan-first 明示、架構性／High-risk，或未授權 external write、destructive／costly／credential／payment／deployment／migration side effect／material scope expansion MUST 先 plan + confirm；明確 in-scope、local、reversible 的 Low／Medium-risk change／build／fix 可直接實作與 non-destructive verification，Medium 留 session plan、不需第二次確認。觸發：將改檔或執行 side effect 且命中前述 protected gate。例外：無。驗證：protected gate 有 plan + 核准原句；direct path 有 user 原句 + risk／reversibility，Medium 有 session plan。
 [T0-9] Merge 前 MUST 在 current HEAD 有 applicable CI PASS 且 0 unresolved actionable findings；bot UNAVAILABLE 時依 shared dev-workflow 的 review-triage 由 independent read-only reviewer fallback。觸發：merge。例外：無。驗證：current-head CI + review gate PASS。
 
 ## Shared Matt workflow
@@ -25,16 +25,13 @@ ponytail=通用慣例；測試敘述 MUST NOT 覆寫 [T0-2]／dev-workflow [INT-
 ## Codex adapter
 
 - 預設 zh-TW；technical terms 保留 English。
-- 回覆 SHOULD outcome-first、無空泛前後文；決策列編號選項／推薦／取捨，單字或數字即為完整回答，推測標記，已決不列替案。
-- 多步任務由 todo tool 承擔進度；未使用時只標「N/M → 下一步」。估時 MUST 有具體單位與前提。
-- 完成回報只寫「變更 → 可用結果 → 驗證指令」；需要 user action 時只留一個 concrete next action，否則直接結束。
-- 刪除空泛首尾、重述、旁註與無資訊 hedge；保留真實不確定性。
-- plan = Plan Mode；todo = update_plan；子代理 = spawn_agent／wait_agent。
+- 回覆 outcome-first；決策列推薦／取捨；推測標記。
+- 多步用 todo；否則只標「N/M → 下一步」。完成只寫「變更 → 可用結果 → 驗證指令」。
+- plan = Plan Mode；todo = update_plan；子代理 = spawn_agent／wait_agent；估時列單位與前提。
 - Delegation：依 shared `dev-workflow` [INT-4] 由 AI 自主判定，無須另問。
 - Shared checkout 或 branch switch 影響 live skills 時，用 `~/.agents/bin/agents-branch` 建 isolated worktree。
 - `~/.codex/hooks.json` Git guard + `~/.codex/rules/default.rules` 疊加防線，不能取代 Tier 0／CI。
-- PR 預設 Ready for review；未明示 Draft 不得建立 Draft。
-- Secrets 只回報 set／unset；不得印 config／credential body。
+- PR 預設 Ready；未明示不建 Draft。Secrets 只報 set／unset，不印 credential body。
 
 ## On-demand stack
 
