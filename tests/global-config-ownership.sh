@@ -40,6 +40,24 @@ for marker in 'Tier 0 hard rules' dev-workflow 'Codex adapter' context7-mcp; do
   grep -Fq "$marker" AGENTS.md || fail "thin kernel marker missing: $marker"
 done
 
+for id in T0-1 T0-5 T0-7; do
+  [ "$(grep -Ec "^\\[$id\\]" AGENTS.md)" -eq 1 ] ||
+    fail "[$id] must have exactly one definition"
+  grep -Eq "^\\[$id\\].*觸發：.*例外：.*驗證：" AGENTS.md ||
+    fail "[$id] must keep directive/trigger/exception/verification on one line"
+done
+
+for contract in \
+  '[T0-1] Action／current-state claim 涉及 path／API／config key 時 MUST 有 live evidence；實際修改／執行 target 仍須 live probe。觸發：前述 action／claim。例外：non-action citation／hypothetical。驗證：read／list／schema probe 或例外標記。' \
+  '[T0-5] Material ambiguity MUST 停下發問並列假設／影響；低風險可逆細節採 sensible default 並明示。觸發：多種合理解讀會改變 outcome／scope／risk。例外：低風險、可逆、無 material impact。驗證：改檔前有澄清或 default／impact 紀錄。' \
+  '[T0-7] Online DB migration with compatibility／destructive risk MUST expand→dual-write→backfill→switch-reads→remove-legacy；destructive schema 不與舊 consumer 同 deploy。觸發：schema／data-contract risk。例外：additive／new-object 或停機 batch 可標不適用階段 `SKIPPED`（理由）。驗證：plan 列 phases／consumer boundary／[T0-6] rollback。' \
+  'OpenAI／Codex → `openai-docs`；Microsoft／Azure／.NET：concepts → `microsoft-docs`；API／SDK → `microsoft-code-reference`。Third-party current docs → available active-host provider-native official-doc capability；absent／`UNAVAILABLE` 才 `context7-mcp`。Refactor／new script／business-logic debug／review／general concept 不觸發。'; do
+  grep -Fqx "$contract" AGENTS.md || fail "thin kernel contract missing: $contract"
+done
+
+grep -Fq 'MUST route to `context7-mcp`' AGENTS.md &&
+  fail 'blanket Context7-first route must not return'
+
 grep -Eq '~/.agents/skills/dev-workflow/SKILL\.md' AGENTS.md ||
   fail 'shared dev-workflow route missing'
 
