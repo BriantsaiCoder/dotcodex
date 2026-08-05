@@ -25,7 +25,7 @@ ponytail=通用慣例；測試敘述 MUST NOT 覆寫 [T0-2]／dev-workflow [INT-
 ## Codex adapter
 
 - 預設 zh-TW；technical terms 保留 English。
-- 回覆 outcome-first；決策列推薦／取捨；推測標記。
+- 回覆 SHOULD outcome-first、無空泛前後文；決策列編號選項／推薦／取捨，單字或數字即為完整回答，推測標記，已決不列替案。
 - 多步用 todo；否則只標「N/M → 下一步」。完成只寫「變更 → 可用結果 → 驗證指令」。
 - plan = Plan Mode；todo = update_plan；子代理 = spawn_agent／wait_agent；估時列單位與前提。
 - Delegation：依 shared `dev-workflow` [INT-4] 由 AI 自主判定，無須另問。
@@ -39,4 +39,4 @@ ponytail=通用慣例；測試敘述 MUST NOT 覆寫 [T0-2]／dev-workflow [INT-
 
 ## Current documentation
 
-OpenAI／Codex → `openai-docs`；Microsoft／Azure／.NET：concepts → `microsoft-docs`；API／SDK → `microsoft-code-reference`。Third-party current docs → available active-host provider-native official-doc capability；absent／`UNAVAILABLE` 才 `context7-mcp`。Refactor／new script／business-logic debug／review／general concept 不觸發。
+OpenAI／Codex 文件 → `openai-docs`；其餘 current docs 路由見 shared `dev-workflow` S0（provider-first，fallback `context7-mcp`）。Refactor／new script／business-logic debug／review／general concept 不觸發。
