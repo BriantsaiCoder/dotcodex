@@ -123,27 +123,41 @@ fi
 grep -Fq '~/.agents/bin/agents-branch' AGENTS.md ||
   fail 'verified agents-branch path missing'
 
-# [S5-3]（~/.agents/skills/dev-workflow/SKILL.md）要求 house over-engineering baseline 兩條
-# 逐字進「每一個」reviewer prompt，含 host-local review agent。Codex 的兩個 .toml 是 Claude
+# [S5-3]（~/.agents/skills/dev-workflow/SKILL.md）要求 house over-engineering baseline 逐字
+# 進 Standards 軸的 reviewer prompt，含 host-local review agent。Codex 的兩個 .toml 是 Claude
 # 側同名 agent 的鏡像；2026-08-03 A1 首次注入時只補了 Claude 側，導致同一個 reviewer 在兩台
 # host 行為不同——[S5-3] 是 shared kernel rule，逐 host 補到一半等於沒補。
 # closed-world set 而非 pattern 過濾，理由同 ~/.claude/tests/repo-integrity.sh 的同名斷言：
 # 檔名 glob 會讓 `security-reviewer` 這類真 code reviewer 靜默漏掉（fail-open）。
-# 比對兩條全文而非英文 label：[S5-3] 驗證條款寫的是「含該兩條全文」。
+# 比對全文而非英文 label：[S5-3] 驗證條款要的是全文。
+#
+# 2026-08-08：baseline 由兩條擴為五條。這裡同步——不擴的話新三條在本 repo 零守衛，而
+# Claude 側（repo-integrity.sh）當天已經同步為五條，等於上面那段註解記載的半同步事故
+# 反向重演一次。後三條釘動作句即足夠唯一，且迴避兩 host 措辭的既有分歧。
 s53_agents='agents/code-reviewer.toml agents/DotNet-Code-Reviewer.toml'
+s53_rules_file="$(mktemp)"
+cat > "$s53_rules_file" <<'S53RULES'
+手刻標準庫或平台已提供的功能 → 指名該 API 取代。
+為平台／既有模組已有的能力新增依賴 → 依選型階梯（原生 > 標準庫 > 既有模組 > 第三方 > 手寫）回退。
+→ 指名既有符號並改呼叫它。
+→ 內聯回去，等真的第二個使用點出現再抽。
+→ 把該決策移回它該在的層。
+S53RULES
 actual_toml="$(git ls-files 'agents/*.toml' | LC_ALL=C sort | tr '\n' ' ')"
 expected_toml="$(printf '%s' "$s53_agents" | tr ' ' '\n' | LC_ALL=C sort | tr '\n' ' ')"
 [ "$actual_toml" = "$expected_toml" ] ||
   fail "agents/ 清單已變動，[S5-3] 分類需更新：實際=[$actual_toml] 已分類=[$expected_toml]"
 for f in $s53_agents; do
   [ -f "$f" ] || fail "[S5-3] 分類指向不存在的 agent: $f"
-  if grep -Fq '手刻標準庫或平台已提供的功能 → 指名該 API 取代。' "$f" &&
-    grep -Fq '為平台／既有模組已有的能力新增依賴 → 依選型階梯（原生 > 標準庫 > 既有模組 > 第三方 > 手寫）回退。' "$f"; then
-    :
-  else
-    fail "code review agent 缺 [S5-3] over-engineering baseline 兩條全文: $f"
-  fi
+  s53_missing=0
+  while IFS= read -r rule; do
+    [ -n "$rule" ] || continue
+    grep -Fq "$rule" "$f" || s53_missing=$((s53_missing + 1))
+  done < "$s53_rules_file"
+  [ "$s53_missing" -eq 0 ] ||
+    fail "code review agent 缺 [S5-3] over-engineering baseline $s53_missing 條全文: $f"
 done
+rm -f "$s53_rules_file"
 
 grep -Eq 'bash tests/global-config-ownership\.sh' .github/workflows/ci.yml ||
   fail 'global ownership test missing from CI'
