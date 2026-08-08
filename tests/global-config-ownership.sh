@@ -135,14 +135,16 @@ grep -Fq '~/.agents/bin/agents-branch' AGENTS.md ||
 # Claude 側（repo-integrity.sh）當天已經同步為五條，等於上面那段註解記載的半同步事故
 # 反向重演一次。後三條釘動作句即足夠唯一，且迴避兩 host 措辭的既有分歧。
 s53_agents='agents/code-reviewer.toml agents/DotNet-Code-Reviewer.toml'
-s53_rules_file="$(mktemp)"
-cat > "$s53_rules_file" <<'S53RULES'
-手刻標準庫或平台已提供的功能 → 指名該 API 取代。
-為平台／既有模組已有的能力新增依賴 → 依選型階梯（原生 > 標準庫 > 既有模組 > 第三方 > 手寫）回退。
-→ 指名既有符號並改呼叫它。
-→ 內聯回去，等真的第二個使用點出現再抽。
-→ 把該決策移回它該在的層。
-S53RULES
+# 用陣列不用暫存檔：`fail` 會直接 exit，暫存檔在失敗路徑上清不掉，而為了清它加一個 trap
+# 比整個檢查還大。前兩條比對全文，後三條比對動作句（已足夠唯一，且迴避兩 host 措辭的
+# 既有分歧）——失敗訊息因此說「條」不說「全文」。
+s53_rules=(
+  '手刻標準庫或平台已提供的功能 → 指名該 API 取代。'
+  '為平台／既有模組已有的能力新增依賴 → 依選型階梯（原生 > 標準庫 > 既有模組 > 第三方 > 手寫）回退。'
+  '→ 指名既有符號並改呼叫它。'
+  '→ 內聯回去，等真的第二個使用點出現再抽。'
+  '→ 把該決策移回它該在的層。'
+)
 actual_toml="$(git ls-files 'agents/*.toml' | LC_ALL=C sort | tr '\n' ' ')"
 expected_toml="$(printf '%s' "$s53_agents" | tr ' ' '\n' | LC_ALL=C sort | tr '\n' ' ')"
 [ "$actual_toml" = "$expected_toml" ] ||
@@ -150,14 +152,12 @@ expected_toml="$(printf '%s' "$s53_agents" | tr ' ' '\n' | LC_ALL=C sort | tr '\
 for f in $s53_agents; do
   [ -f "$f" ] || fail "[S5-3] 分類指向不存在的 agent: $f"
   s53_missing=0
-  while IFS= read -r rule; do
-    [ -n "$rule" ] || continue
+  for rule in "${s53_rules[@]}"; do
     grep -Fq "$rule" "$f" || s53_missing=$((s53_missing + 1))
-  done < "$s53_rules_file"
+  done
   [ "$s53_missing" -eq 0 ] ||
-    fail "code review agent 缺 [S5-3] over-engineering baseline $s53_missing 條全文: $f"
+    fail "code review agent 缺 [S5-3] over-engineering baseline $s53_missing 條: $f"
 done
-rm -f "$s53_rules_file"
 
 grep -Eq 'bash tests/global-config-ownership\.sh' .github/workflows/ci.yml ||
   fail 'global ownership test missing from CI'
