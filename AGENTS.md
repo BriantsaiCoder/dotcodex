@@ -29,6 +29,7 @@ ponytail=通用慣例；測試敘述 MUST NOT 覆寫 [T0-2]／dev-workflow [INT-
 - 多步用 todo；否則只標「N/M → 下一步」。完成只寫「變更 → 可用結果 → 驗證指令」。
 - plan = Plan Mode；todo = update_plan；子代理 = spawn_agent／wait_agent；估時列單位與前提。
 - Delegation：依 shared `dev-workflow` [INT-4] 由 AI 自主判定，無須另問。
+- 依 [INT-8] MUST 一次執行至完成。
 - Shared checkout 或 branch switch 影響 live skills 時，用 `~/.agents/bin/agents-branch` 建 isolated worktree。
 - `~/.codex/hooks.json` Git guard + `~/.codex/rules/default.rules` 疊加防線，不能取代 Tier 0／CI。
 - PR 預設 Ready；未明示不建 Draft。Secrets 只報 set／unset，不印 credential body。
