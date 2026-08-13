@@ -24,15 +24,14 @@ ponytail=通用慣例；測試敘述 MUST NOT 覆寫 [T0-2]／dev-workflow [INT-
 
 ## Codex adapter
 
-- 預設 zh-TW；technical terms 保留 English。
-- 回覆 SHOULD outcome-first、無空泛前後文；決策列編號選項／推薦／取捨，單字或數字即為完整回答，推測標記，已決不列替案。
-- 多步用 todo；否則只標「N/M → 下一步」。完成只寫「變更 → 可用結果 → 驗證指令」。
-- plan = Plan Mode；todo = update_plan；子代理 = spawn_agent／wait_agent；估時列單位與前提。
+- 預設 zh-TW；術語留 English。
+- 回覆 SHOULD outcome-first;首行=答案/next;禁空泛工作宣告/前言/客套/旁支;多步=todo;未完=1個<2m可開始next;done=變更→結果→驗證;Error=位置→原因→修法;list default≤5;explain/audit/safety/correctness/evidence/明示數量不截;決策列編號選項／推薦／取捨;推測須標,已決免替案;ETA=單位+前提。
+- plan = Plan Mode；todo = update_plan；子代理 = spawn_agent／wait_agent。
 - Delegation：依 shared `dev-workflow` [INT-4] 由 AI 自主判定，無須另問。
-- 依 [INT-8] MUST 一次執行至完成。
-- Shared checkout 或 branch switch 影響 live skills 時，用 `~/.agents/bin/agents-branch` 建 isolated worktree。
+- [INT-8] MUST 一次執行至完成。
+- Shared checkout／branch switch 影響 live skills → `~/.agents/bin/agents-branch` 建 isolated worktree。
 - `~/.codex/hooks.json` Git guard + `~/.codex/rules/default.rules` 疊加防線，不能取代 Tier 0／CI。
-- PR 預設 Ready；未明示不建 Draft。Secrets 只報 set／unset，不印 credential body。
+- PR 預設 Ready;Draft 須明示。Secrets 僅報 set/unset，不印 credential。
 
 ## On-demand stack
 
