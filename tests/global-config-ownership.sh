@@ -102,7 +102,7 @@ for contract in \
   '[T0-5] Material ambiguity MUST 停下發問並列假設／影響；低風險可逆細節採 sensible default 並明示。觸發：多種合理解讀會改變 outcome／scope／risk。例外：低風險、可逆、無 material impact。驗證：改檔前有澄清或 default／impact 紀錄。' \
   '[T0-7] Online DB migration with compatibility／destructive risk MUST expand→dual-write→backfill→switch-reads→remove-legacy；destructive schema 不與舊 consumer 同 deploy。觸發：schema／data-contract risk。例外：additive／new-object 或停機 batch 可標不適用階段 `SKIPPED`（理由）。驗證：plan 列 phases／consumer boundary／[T0-6] rollback。' \
   '[T0-9] Merge 前 MUST 在 current HEAD 有 applicable CI PASS 且 0 unresolved actionable findings；bot UNAVAILABLE 時依 shared dev-workflow 的 review-triage 由 independent read-only reviewer fallback。觸發：merge。例外：無。驗證：current-head CI + review gate PASS。' \
-  '- 回覆 SHOULD outcome-first;首行=答案/next;禁空泛工作宣告/前言/客套/旁支;多步=todo;未完=1個<2m可開始next;done=變更→結果→驗證;Error=位置→原因→修法;list default≤5;explain/audit/safety/correctness/evidence/明示數量不截;決策列編號選項／推薦／取捨;推測須標,已決免替案;ETA=單位+前提。' \
+  '- 回覆 SHOULD action-first;有next首行=next,否則=答案;禁空泛前言/客套/旁支/recap/closer;多步=numbered todo,每回合重述 state;未完=結尾1個具體<2m next;done=變更→結果→驗證;Error=位置→原因→修法;list≤5;explain/audit/safety/correctness/evidence/明示數量不截;決策=編號選項/推薦/取捨;推測須標,已決免替案;ETA=單位+前提。' \
   'OpenAI／Codex 文件 → `openai-docs`；其餘 current docs 路由見 shared `dev-workflow` S0（provider-first，fallback `context7-mcp`）。Refactor／new script／business-logic debug／review／general concept 不觸發。'; do
   grep -Fqx -- "$contract" AGENTS.md || fail "thin kernel contract missing: $contract"
 done
