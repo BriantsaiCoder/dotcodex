@@ -108,9 +108,11 @@ done
 # home），所以本 repo 的 CI 對 CAP drift 原本完全無感：2026-08-15 起 AGENTS.md 寫著
 # action-first 而 canonical 是 outcome-first，安穩通過了 12 天的 CI 才由人工 review 發現。
 #
-# 只列 canonical 那些 clause 裡**尚未被本檔其他斷言覆蓋**的（2026-08-28 逐條機械比對，
-# 其餘由上方的 marker loop、[T0-8] clause loop 與下方的 contract loop 釘住）。刻意不重列
-# 已覆蓋的：重複一份就是第二個真實來源，漂移時兩份各自過期而沒有人會發現。
+# 只列 canonical 那些 clause 裡**尚未被本檔其他斷言覆蓋**的（2026-08-28 逐條機械比對）。
+# 不指名是哪些機制覆蓋了其餘的：覆蓋來源散在迴圈與獨立 grep 斷言之間，寫下來就會隨覆蓋
+# 移動而漂移——前一版正是這樣寫錯的（把幾條獨立斷言的功勞算給了三個迴圈）。要知道某條
+# 為什麼不在這個清單裡，就把它從 AGENTS.md 拿掉再跑一次本檔。
+# 刻意不重列已覆蓋的：重複一份就是第二個真實來源，漂移時兩份各自過期而沒有人會發現。
 #
 # 本清單是 canonical mapping 的鏡像，兩者分歧時以 ~/.agents 那份為準。它抓的是「AGENTS.md
 # 掉了 clause」，不抓「mapping 改了措辭」——後者由本機的 parity gate 負責。
