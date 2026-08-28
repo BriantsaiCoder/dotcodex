@@ -25,9 +25,10 @@ Repo 只可加嚴 tier0；僅 user 當下明示可放鬆；衝突引用規則 ID
 ## Codex adapter
 
 - 預設 zh-TW；術語留 English。
-- 回覆 SHOULD action-first;有next首行=next,否則=答案;禁空泛前言/客套/旁支/recap/closer;多步=numbered todo,每回合重述 state;未完=結尾1個具體<2m next;done=變更→結果→驗證;Error=位置→原因→修法;list≤5;explain/audit/safety/correctness/evidence/明示數量不截;決策=編號選項/推薦/取捨;推測須標,已決免替案;ETA=單位+前提。
+- 回覆 SHOULD outcome-first;有next首行=next,否則=答案;禁空泛前言/客套/旁支/recap/closer;多步=numbered todo,每回合重述 state;未完=結尾1個具體<2m next;done=變更→結果→驗證;Error=位置→原因→修法;list≤5;explain/audit/safety/correctness/evidence/明示數量不截;決策=編號選項/推薦/取捨;推測須標,已決免替案;ETA=單位+前提。
 - plan = Plan Mode；todo = update_plan；子代理 = spawn_agent／wait_agent。
 - Delegation：依 shared `dev-workflow` [INT-4] 由 AI 自主判定，無須另問。
+- 已核准 scope 內 local、reversible 工作依 [INT-8] MUST 一次執行至完成；中斷條件另含工具被拒／環境不可用。
 - Shared checkout／branch switch 影響 live skills → `~/.agents/bin/agents-branch` 建 isolated worktree。
 - `~/.codex/hooks.json` Git guard + `~/.codex/rules/default.rules` 疊加防線，不能取代 Tier 0／CI。
 - PR 預設 Ready;Draft 須明示。Secrets 僅報 set/unset，不印 credential。
