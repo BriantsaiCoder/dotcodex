@@ -97,6 +97,22 @@ for marker in 'Tier 0 hard rules' dev-workflow 'Codex adapter' 'On-demand stack'
   grep -Fq "$marker" AGENTS.md || fail "thin kernel marker missing: $marker"
 done
 
+# 三家 capability parity 的 Codex 欄 anchor。canonical 定義在 ~/.agents 的
+# skills/dev-workflow/references/host-adapters.md（capability-parity 區塊），由該 repo 的
+# tests/three-host-capability-parity.sh 比對——但那支只能在本機跑（runner 沒有三個 host 的
+# home），所以本 repo 的 CI 對 CAP drift 原本完全無感：2026-08-15 起 AGENTS.md 寫著
+# action-first 而 canonical 是 outcome-first，安穩通過了 12 天的 CI 才由人工 review 發現。
+#
+# 只列 canonical 那些 clause 裡**尚未被本檔其他斷言覆蓋**的（2026-08-28 逐條機械比對，
+# 其餘由上方的 marker loop、[T0-8] clause loop 與下方的 contract loop 釘住）。刻意不重列
+# 已覆蓋的：重複一份就是第二個真實來源，漂移時兩份各自過期而沒有人會發現。
+#
+# 本清單是 canonical mapping 的鏡像，兩者分歧時以 ~/.agents 那份為準。它抓的是「AGENTS.md
+# 掉了 clause」，不抓「mapping 改了措辭」——後者由本機的 parity gate 負責。
+for cap_anchor in '程序只由該 skill 維護' 'MUST 一次執行至完成' '可直接實作' 'ponytail=通用慣例'; do
+  grep -Fq -- "$cap_anchor" AGENTS.md || fail "capability parity anchor missing: $cap_anchor"
+done
+
 for id in T0-1 T0-5 T0-7 T0-8 T0-9; do
   [ "$(grep -Ec "^\\[$id\\]" AGENTS.md)" -eq 1 ] ||
     fail "[$id] must have exactly one definition"
