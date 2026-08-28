@@ -31,7 +31,12 @@ done
 grep -Fqx 'set -ufo pipefail' hooks/guard-git-push.sh ||
   fail 'Codex push guard must keep canonical pipefail mode'
 
-push_probe_dir="$(mktemp -d)"
+# template 不可省：macOS 的 mktemp 在沒有 template 時走 confstr(_CS_DARWIN_USER_TEMP_DIR)
+# （/var/folders/…/T/）而**忽略 $TMPDIR**，於是在只放行 $TMPDIR 的 sandbox 下 mkdtemp 失敗，
+# 而本檔是 set -euo pipefail，整份測試就在這一行 rc=1 中止——包括下面那些 CAP anchor 斷言。
+# 後果不是報錯而是「跑不了」：sandbox 內的自動化驗不了本檔，只剩 ubuntu runner 能驗。
+# 2026-08-28 S5 實測（同一個坑 ~/.claude/tests/repo-integrity.sh 早已記載並修過）。
+push_probe_dir="$(mktemp -d "${TMPDIR:-/tmp}/codex-gco.XXXXXX")"
 trap 'rm -rf "$push_probe_dir"' EXIT
 push_probe() { # $1=allow|deny $2=command
   local want="$1" cmd="$2" rc actual
