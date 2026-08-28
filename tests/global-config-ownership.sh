@@ -31,7 +31,12 @@ done
 grep -Fqx 'set -ufo pipefail' hooks/guard-git-push.sh ||
   fail 'Codex push guard must keep canonical pipefail mode'
 
-push_probe_dir="$(mktemp -d)"
+# template 不可省：macOS 的 mktemp 在沒有 template 時走 confstr(_CS_DARWIN_USER_TEMP_DIR)
+# （/var/folders/…/T/）而**忽略 $TMPDIR**，於是在只放行 $TMPDIR 的 sandbox 下 mkdtemp 失敗，
+# 而本檔是 set -euo pipefail，整份測試就在這一行 rc=1 中止——包括下面那些 CAP anchor 斷言。
+# 後果不是報錯而是「跑不了」：sandbox 內的自動化驗不了本檔，只剩 ubuntu runner 能驗。
+# 2026-08-28 S5 實測（同一個坑 ~/.claude/tests/repo-integrity.sh 早已記載並修過）。
+push_probe_dir="$(mktemp -d "${TMPDIR:-/tmp}/codex-gco.XXXXXX")"
 trap 'rm -rf "$push_probe_dir"' EXIT
 push_probe() { # $1=allow|deny $2=command
   local want="$1" cmd="$2" rc actual
@@ -95,6 +100,24 @@ bytes=$(wc -c < AGENTS.md | tr -d ' ')
 
 for marker in 'Tier 0 hard rules' dev-workflow 'Codex adapter' 'On-demand stack' context7-mcp; do
   grep -Fq "$marker" AGENTS.md || fail "thin kernel marker missing: $marker"
+done
+
+# 三家 capability parity 的 Codex 欄 anchor。canonical 定義在 ~/.agents 的
+# skills/dev-workflow/references/host-adapters.md（capability-parity 區塊），由該 repo 的
+# tests/three-host-capability-parity.sh 比對——但那支只能在本機跑（runner 沒有三個 host 的
+# home），所以本 repo 的 CI 對 CAP drift 原本完全無感：2026-08-15 起 AGENTS.md 寫著
+# action-first 而 canonical 是 outcome-first，安穩通過了 12 天的 CI 才由人工 review 發現。
+#
+# 只列 canonical 那些 clause 裡**尚未被本檔其他斷言覆蓋**的（2026-08-28 逐條機械比對）。
+# 不指名是哪些機制覆蓋了其餘的：覆蓋來源散在迴圈與獨立 grep 斷言之間，寫下來就會隨覆蓋
+# 移動而漂移——前一版正是這樣寫錯的（把幾條獨立斷言的功勞算給了三個迴圈）。要知道某條
+# 為什麼不在這個清單裡，就把它從 AGENTS.md 拿掉再跑一次本檔。
+# 刻意不重列已覆蓋的：重複一份就是第二個真實來源，漂移時兩份各自過期而沒有人會發現。
+#
+# 本清單是 canonical mapping 的鏡像，兩者分歧時以 ~/.agents 那份為準。它抓的是「AGENTS.md
+# 掉了 clause」，不抓「mapping 改了措辭」——後者由本機的 parity gate 負責。
+for cap_anchor in '程序只由該 skill 維護' 'MUST 一次執行至完成' '可直接實作' 'ponytail=通用慣例'; do
+  grep -Fq -- "$cap_anchor" AGENTS.md || fail "capability parity anchor missing: $cap_anchor"
 done
 
 for id in T0-1 T0-5 T0-7 T0-8 T0-9; do
