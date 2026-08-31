@@ -20,7 +20,7 @@ Repo 只可加嚴 tier0；僅 user 當下明示可放鬆；衝突引用規則 ID
 
 ## Shared Matt workflow
 
-任何開發任務 MUST 先讀 `~/.agents/skills/dev-workflow/SKILL.md`；routing、authorization、RED→GREEN、S4–S6 與 PR gate 的程序只由該 skill 維護，本檔不重複。
+開發任務 MUST 先讀 `~/.agents/skills/dev-workflow/SKILL.md`；routing、authorization、RED→GREEN、S4–S6 與 PR gate 的程序只由該 skill 維護。非開發任務按需掃 `~/.agents/skills/`。
 
 ## Codex adapter
 
@@ -32,7 +32,7 @@ Repo 只可加嚴 tier0；僅 user 當下明示可放鬆；衝突引用規則 ID
 - 已核准 scope 內 local、reversible 工作依 [INT-8] MUST 一次執行至完成；中斷條件另含工具被拒／環境不可用。
 - Shared checkout／branch switch 影響 live skills → `~/.agents/bin/agents-branch` 建 isolated worktree。
 - `~/.codex/hooks.json` Git guard + `~/.codex/rules/default.rules` 疊加防線，不能取代 Tier 0／CI。
-- PR 預設 Ready;Draft 須明示。Secrets 僅報 set/unset，不印 credential。
+- PR 預設 Ready;Draft 須明示。Secrets 僅報 set/unset。
 
 ## On-demand stack
 
