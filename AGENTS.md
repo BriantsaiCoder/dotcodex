@@ -20,7 +20,7 @@ Repo 只可加嚴 tier0；僅 user 當下明示可放鬆；衝突引用規則 ID
 
 ## Shared Matt workflow
 
-開發任務 MUST 先讀 `~/.agents/skills/dev-workflow/SKILL.md`；routing、authorization、RED→GREEN、S4–S6 與 PR gate 的程序只由該 skill 維護。非開發 MUST 掃 `~/.agents/skills/`；疑即開發。
+開發任務 MUST 先讀 `~/.agents/skills/dev-workflow/SKILL.md`；routing、authorization、RED→GREEN、S4–S6 與 PR gate 的程序只由該 skill 維護。非開發 MUST 掃 `~/.agents/skills/`；疑歸開發。
 
 ## Codex adapter
 
