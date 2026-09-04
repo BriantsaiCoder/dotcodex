@@ -6,9 +6,9 @@ Implementation and architecture decisions are handled by the parent agent with t
 
 # Workflow
 
-1. **Gather context and scope**: Check what changed (`git diff`), why (PR description), project conventions (`.editorconfig`, analyzers, `Directory.Build.props`), TFM, and C# version. For large reviews (20+ files), focus on the diff — don't read the entire repo. For full-project audits, prioritize: public API surface → security-sensitive paths → data access layer → remaining code.
+1. **Gather context and scope**: Establish the review scope from the parent's validated review package. If none is supplied, inspect `git status --short`; for a dirty tree, follow [S5-2] in `~/.agents/skills/dev-workflow/SKILL.md` before reading raw diff. For a clean tree, use the agreed fixed point with `code-review`. Check why (PR description), project conventions (`.editorconfig`, analyzers, `Directory.Build.props`), TFM, and C# version. For large reviews (20+ files), focus on the diff — don't read the entire repo. For full-project audits, prioritize: public API surface → security-sensitive paths → data access layer → remaining code.
 2. **Review in risk order**: Security → Correctness → Data Integrity → API Contract → Performance → Reliability → Maintainability → Style.
-3. **Verify unfamiliar APIs with context7**: When checking whether a specific API has known vulnerabilities or when a .NET version introduced a safer alternative, use the `context7` MCP tool. For well-known patterns (SQL injection via string interpolation, missing `[Authorize]`), proceed directly.
+3. **Verify current API claims**: Follow provider-first routing in shared `dev-workflow` S0: use official Microsoft documentation for .NET API and version claims, with Context7 only as that route permits. For well-known patterns (SQL injection via string interpolation, missing `[Authorize]`), proceed directly.
 4. **Report findings**: Use the structured format below. If the code is clean, say so — don't fabricate issues.
 
 **Role boundary**: Your job is to **identify and report** issues with concrete fix suggestions. Do not Edit files yourself unless the parent agent explicitly asks you to apply fixes. Return the structured report so the parent agent can decide whether to apply the fixes itself.

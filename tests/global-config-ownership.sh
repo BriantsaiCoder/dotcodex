@@ -140,9 +140,9 @@ for contract in \
   '[T0-5] Material ambiguity MUST 停下發問並列假設／影響；低風險可逆細節採 sensible default 並明示。觸發：多種合理解讀會改變 outcome／scope／risk。例外：低風險、可逆、無 material impact。驗證：改檔前有澄清或 default／impact 紀錄。' \
   '[T0-7] Online DB migration with compatibility／destructive risk MUST expand→dual-write→backfill→switch-reads→remove-legacy；destructive schema 不與舊 consumer 同 deploy。觸發：schema／data-contract risk。例外：additive／new-object 或停機 batch 可標不適用階段 `SKIPPED`（理由）。驗證：plan 列 phases／consumer boundary／[T0-6] rollback。' \
   '[T0-9] Merge 前 MUST 在 current HEAD 有 applicable CI PASS 且 0 unresolved actionable findings；bot UNAVAILABLE 時依 shared dev-workflow 的 review-triage 由 independent read-only reviewer fallback。觸發：merge。例外：無。驗證：current-head CI + review gate PASS。' \
-  '- 回覆 SHOULD outcome-first;有next首行=next,否則=答案;禁空泛前言/客套/旁支/recap/closer;多步=numbered todo,每回合重述 state;未完=結尾1個具體<2m next;done=變更→結果→驗證;Error=位置→原因→修法;list≤5;explain/audit/safety/correctness/evidence/明示數量不截;決策=編號選項/推薦/取捨;推測須標,已決免替案;ETA=單位+前提。' \
+  '- 回覆 SHOULD outcome-first；簡潔說明結果、必要證據與限制；未完附下一步；決策用編號選項/推薦/取捨；推測須標示。' \
   'OpenAI／Codex 文件 → `openai-docs`；其餘 current docs 路由見 shared `dev-workflow` S0（provider-first，fallback `context7-mcp`）。Refactor／new script／business-logic debug／review／general concept 不觸發。' \
-  '- 回覆前 MUST 讀 `~/.agents/profile.md`（使用者背景）；缺檔則跳過。'; do
+  '- 每個 session 首次回覆前 MUST 讀 `~/.agents/profile.md`；已讀且未變更則免重讀；缺檔則跳過。'; do
   grep -Fqx -- "$contract" AGENTS.md || fail "thin kernel contract missing: $contract"
 done
 
@@ -174,6 +174,9 @@ grep -Fqx -- '- Delegation：依 shared `dev-workflow` [INT-4] 由 AI 自主判�
 if grep -Eq 'resolve-library-id|query-docs|^### S[456]|bin/pr-review-gate' AGENTS.md; then
   fail 'AGENTS.md duplicates skill-owned procedure'
 fi
+
+grep -Fq '工具對應與 unavailable fallback 見 shared `dev-workflow/references/host-adapters.md`' AGENTS.md ||
+  fail 'Codex tool mapping must delegate unavailable fallback to the shared adapter'
 
 grep -Fq '~/.agents/bin/agents-branch' AGENTS.md ||
   fail 'verified agents-branch path missing'
@@ -213,6 +216,18 @@ for f in $s53_agents; do
   [ "$s53_missing" -eq 0 ] ||
     fail "code review agent 缺 [S5-3] over-engineering baseline $s53_missing 條: $f"
 done
+
+# Dirty review intake must defer raw diff until the shared package gate passes.
+for f in $s53_agents; do
+  for clause in "parent's validated review package" 'git status --short' '[S5-2]' \
+                'before reading raw diff' 'clean tree' 'agreed fixed point'; do
+    grep -Fq -- "$clause" "$f" || fail "review intake missing '$clause': $f"
+  done
+done
+grep -Fq 'provider-first routing in shared `dev-workflow` S0' agents/DotNet-Code-Reviewer.toml ||
+  fail '.NET reviewer must use official provider documentation first'
+grep -Fq 'Context7 only as that route permits' agents/DotNet-Code-Reviewer.toml ||
+  fail '.NET reviewer must keep Context7 as the shared-route fallback'
 
 grep -Eq 'bash tests/global-config-ownership\.sh' .github/workflows/ci.yml ||
   fail 'global ownership test missing from CI'
