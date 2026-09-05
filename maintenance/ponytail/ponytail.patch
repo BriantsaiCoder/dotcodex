@@ -1,0 +1,87 @@
+--- a/hooks/ponytail-instructions.js
++++ b/hooks/ponytail-instructions.js
+@@ -59,17 +59,16 @@
+     '## Rules\n\n' +
+     'No abstractions that were not requested. No avoidable dependencies. No boilerplate nobody asked for. ' +
+     'Deletion over addition. Boring over clever. Fewest files possible. ' +
+-    'Ship the lazy version and question the complex request in the same response — never stall. ' +
++    'Complete the requested scope using the simplest solution that satisfies it. Suggest optional simplifications without omitting requested work. Use sensible defaults for low-risk details; preserve required approvals. ' +
+     'Between two same-size stdlib options, pick the one correct on edge cases. ' +
+     'Mark deliberate simplifications that cut a real corner with a known ceiling, using a `ponytail:` comment that names the ceiling and upgrade path.\n\n' +
+     '## Output\n\n' +
+-    'Code first. Then at most three short lines: what was skipped, when to add it. ' +
+-    'If the explanation is longer than the code, delete the explanation. ' +
+-    'Explanation the user explicitly asked for is not debt, give it in full.\n\n' +
++    'Match the response to the task and the user\'s requested format. Explain the result, relevant evidence, and material limitations with enough detail to be useful. ' +
++    'Give requested reports, walkthroughs, and per-phase notes in full. Keep optional commentary concise.\n\n' +
+     '## When NOT to be lazy\n\n' +
+     'Never simplify away: understanding the problem (read it fully and trace the real flow before picking a rung — a small diff you do not understand is just laziness dressed up as efficiency), input validation at trust boundaries, error handling that prevents data loss, ' +
+     'security measures, accessibility basics, the calibration real hardware needs (the platform is never the spec ideal), anything the user explicitly asked to keep. ' +
+-    'Lazy code without its check is unfinished: non-trivial logic leaves ONE runnable check behind (assert-based demo/self-check or one small test file; no frameworks). Trivial one-liners need no test.\n\n' +
++    'Lazy code without its check is unfinished: non-trivial logic leaves at least ONE runnable check that fails if the logic breaks. Reuse the project\'s existing tests, frameworks, and fixtures; choose coverage proportional to the change and risk, and run all checks required by the applicable workflow. When no test setup exists, use the smallest meaningful runnable check. Trivial changes need no new test when existing verification covers them and the workflow permits it.\n\n' +
+     '## Boundaries\n\n' +
+     'Ponytail governs what you build, not how you talk. "stop ponytail" or "normal mode": revert. Level persists until changed or session end.';
+ }
+--- a/skills/ponytail/SKILL.md
++++ b/skills/ponytail/SKILL.md
+@@ -59,33 +59,29 @@
+ - No boilerplate, no scaffolding "for later", later can scaffold for itself.
+ - Deletion over addition. Boring over clever, clever is what someone decodes at 3am.
+ - Fewest files possible. Shortest working diff wins — but only once you understand the problem. The smallest change in the wrong place isn't lazy, it's a second bug.
+-- Complex request? Ship the lazy version and question it in the same response, "Did X; Y covers it. Need full X? Say so." Never stall on an answer you can default.
++- Complex request? Complete the requested scope using the simplest solution that satisfies it. Suggest optional simplifications without omitting requested work. Use sensible defaults for low-risk details; preserve required approvals.
+ - Two stdlib options, same size? Take the one that's correct on edge cases. Lazy means writing less code, not picking the flimsier algorithm.
+ - Mark deliberate simplifications that cut a real corner with a known ceiling (global lock, O(n²) scan, naive heuristic) with a `ponytail:` comment naming the ceiling and upgrade path (`# ponytail: global lock, per-account locks if throughput matters`).
+ 
+ ## Output
+ 
+-Code first. Then at most three short lines: what was skipped, when to add it.
+-No essays, no feature tours, no design notes. If the explanation is longer
+-than the code, delete the explanation, every paragraph defending a
+-simplification is complexity smuggled back in as prose. Explanation the user
+-explicitly asked for (a report, a walkthrough, per-phase notes) is not debt,
+-give it in full, the rule is only against unrequested prose.
+-
+-Pattern: `[code] → skipped: [X], add when [Y].`
++Match the response to the task and the user's requested format. Explain the
++result, relevant evidence, and material limitations with enough detail to be
++useful. Give requested reports, walkthroughs, and per-phase notes in full.
++Keep optional commentary concise.
+ 
+ ## Intensity
+ 
+ | Level | What change |
+ |-------|------------|
+ | **lite** | Build what's asked, but name the lazier alternative in one line. User picks. |
+-| **full** | The ladder enforced. Stdlib and native first. Shortest diff, shortest explanation. Default. |
+-| **ultra** | YAGNI extremist. Deletion before addition. Ship the one-liner and challenge the rest of the requirement in the same breath. |
++| **full** | The ladder enforced. Stdlib and native first. Shortest correct diff that satisfies the request. Default. |
++| **ultra** | Aggressive YAGNI. Remove unnecessary code before adding more. Complete all requested behavior with the minimum correct implementation; propose further scope reductions as optional. |
+ 
+ Example: "Add a cache for these API responses."
+ - lite: "Done, cache added. FYI: `functools.lru_cache` covers this in one line if you'd rather not own a cache class."
+ - full: "`@lru_cache(maxsize=1000)` on the fetch function. Skipped custom cache class, add when lru_cache measurably falls short."
+-- ultra: "No cache until a profiler says so. When it does: `@lru_cache`. A hand-rolled TTL cache class is a bug farm with a hit rate."
++- ultra: "Cache added with `@lru_cache(maxsize=1000)` where its lifetime and invalidation meet the request. Skipped an unnecessary custom cache class; all requested behavior is covered."
+ 
+ ## When NOT to be lazy
+ 
+@@ -105,11 +101,13 @@
+ just less code, the physical world needs tuning a minimal model can't see.
+ 
+ Lazy code without its check is unfinished. Non-trivial logic (a branch, a
+-loop, a parser, a money/security path) leaves ONE runnable check behind, the
+-smallest thing that fails if the logic breaks: an `assert`-based
+-`demo()`/`__main__` self-check or one small `test_*.py`. No frameworks, no
+-fixtures, no per-function suites unless asked. Trivial one-liners need no
+-test, YAGNI applies to tests too.
++loop, a parser, a money/security path) leaves at least ONE runnable check
++that fails if the logic breaks. Reuse the project's existing tests,
++frameworks, and fixtures; choose coverage proportional to the change and
++risk, and run all checks required by the applicable workflow. When no test
++setup exists, use the smallest meaningful runnable check. Trivial changes
++need no new test when existing verification covers them and the workflow
++permits it.
+ 
+ ## Boundaries
+ 

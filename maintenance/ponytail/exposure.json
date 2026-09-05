@@ -1,0 +1,18 @@
+{
+  "disable_names": [
+    "codex:codex-cli-runtime",
+    "codex:codex-result-handling",
+    "codex:gpt-5-4-prompting",
+    "ponytail:ponytail-gain",
+    "ponytail:ponytail-review"
+  ],
+  "keep_plugins_enabled": [
+    "codex@openai-codex",
+    "ponytail@ponytail"
+  ],
+  "retain_conditional": [
+    "chrome:control-chrome",
+    "build-web-apps:react-best-practices"
+  ],
+  "reason": "Only Codex catalog entries are suppressed; runtime/hooks/Claude rescue remain installed. Chrome capability and plugin React selection need separate runtime evidence before suppression."
+}

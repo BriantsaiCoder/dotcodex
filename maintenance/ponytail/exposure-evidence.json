@@ -1,0 +1,16 @@
+{
+  "cli": "0.153.3",
+  "observer": "codex debug prompt-input; invocation overrides only",
+  "before_count": 92,
+  "after_count": 87,
+  "removed": [
+    "codex:codex-cli-runtime",
+    "codex:codex-result-handling",
+    "codex:gpt-5-4-prompting",
+    "ponytail:ponytail-gain",
+    "ponytail:ponytail-review"
+  ],
+  "unexpected_added": [],
+  "exit": 0,
+  "runtime": "No plugin enablement or hooks changed by this observer; installation state unchanged."
+}

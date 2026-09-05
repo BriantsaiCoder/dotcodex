@@ -1,0 +1,857 @@
+{
+  ".agents/plugins/marketplace.json": {
+    "sha256": "429fd8844db68d98bde0316f0328458dc8169d2fd9740e59f84b5bdf827421f4",
+    "mode": "0o644",
+    "bytes": 410
+  },
+  ".agents/rules/ponytail.md": {
+    "sha256": "571275b654460fbba63d685c69b3fde422a0a82d69b814561f878797ae9adae1",
+    "mode": "0o644",
+    "bytes": 2495
+  },
+  ".claude-plugin/marketplace.json": {
+    "sha256": "5c17acc0d30732735a7bf725214b8db9f8a1bb3485233744c7a5e0ca1d7434e8",
+    "mode": "0o644",
+    "bytes": 513
+  },
+  ".claude-plugin/plugin.json": {
+    "sha256": "2e0fccb26a45203f0930eed785926926c2ca846389934ca30a210281263f78a2",
+    "mode": "0o644",
+    "bytes": 342
+  },
+  ".clinerules/ponytail.md": {
+    "sha256": "571275b654460fbba63d685c69b3fde422a0a82d69b814561f878797ae9adae1",
+    "mode": "0o644",
+    "bytes": 2495
+  },
+  ".codex-plugin/plugin.json": {
+    "sha256": "dfe092d6d9ead638c641ddf9f2daf44aded4aad788ad5be63fa2a66a6d3027dc",
+    "mode": "0o644",
+    "bytes": 1280
+  },
+  ".cursor/rules/ponytail.mdc": {
+    "sha256": "e5b63124834c65e73208e8349e6cfd90b56757646c576a393932a01adc63940f",
+    "mode": "0o644",
+    "bytes": 2620
+  },
+  ".devin-plugin/plugin.json": {
+    "sha256": "25b5b4d7554d7b43919144d8858501c595a74818300d86dea83bf60ff8a04966",
+    "mode": "0o644",
+    "bytes": 508
+  },
+  ".env.example": {
+    "sha256": "8f727812badfebdf733c3a7f39c9a54f6a64367554c777171dc526783d3e0f74",
+    "mode": "0o644",
+    "bytes": 106
+  },
+  ".git/HEAD": {
+    "sha256": "28d25bf82af4c0e2b72f50959b2beb859e3e60b9630a5e8c603dad4ddb2b6e80",
+    "mode": "0o644",
+    "bytes": 21
+  },
+  ".git/config": {
+    "sha256": "1faf78ca246dfbbfa18538d492191004c72e30f8eea2a00489d6a94eee9b8a97",
+    "mode": "0o644",
+    "bytes": 312
+  },
+  ".git/index": {
+    "sha256": "d81b6497857460a585de9c377732d85f935e7da5778fca53f8c6821dcfc480aa",
+    "mode": "0o644",
+    "bytes": 16808
+  },
+  ".git/logs/HEAD": {
+    "sha256": "333d7abdbd97038876353ba231251624539edcc9dc905124de0ea324e47d0055",
+    "mode": "0o644",
+    "bytes": 424
+  },
+  ".git/logs/refs/heads/main": {
+    "sha256": "834e3c2444004a5c8b14b48f3d2166fbd4ce3e66d64057b362f6256baab0eb34",
+    "mode": "0o644",
+    "bytes": 224
+  },
+  ".git/logs/refs/remotes/origin/HEAD": {
+    "sha256": "834e3c2444004a5c8b14b48f3d2166fbd4ce3e66d64057b362f6256baab0eb34",
+    "mode": "0o644",
+    "bytes": 224
+  },
+  ".git/objects/pack/pack-64a005eb31d8b73037dba26e88547d53f1303fc7.idx": {
+    "sha256": "1e1b2f103b03793e870f0066af63107113de4a24f907bf031cea49c9c3f0c6f6",
+    "mode": "0o444",
+    "bytes": 47328
+  },
+  ".git/objects/pack/pack-64a005eb31d8b73037dba26e88547d53f1303fc7.pack": {
+    "sha256": "5e680c88267853c678ecf8582583646c5db034d519619a0ea7b644f51bfa1b81",
+    "mode": "0o444",
+    "bytes": 2353059
+  },
+  ".git/objects/pack/pack-64a005eb31d8b73037dba26e88547d53f1303fc7.rev": {
+    "sha256": "42249ae442386fe0d7ccf30560ea7839a250d73085eadca1e24f32bf09650dc8",
+    "mode": "0o444",
+    "bytes": 6660
+  },
+  ".git/packed-refs": {
+    "sha256": "337cabb0b3d1a66f6c229f371734d52f531f7cd370147eafc957ed4dcbcdbfff",
+    "mode": "0o644",
+    "bytes": 4236
+  },
+  ".git/refs/heads/main": {
+    "sha256": "2cc9aab61fe6cfb906497670e37d09706b1c509c511e82ad677faedd046aea55",
+    "mode": "0o644",
+    "bytes": 41
+  },
+  ".git/refs/remotes/origin/HEAD": {
+    "sha256": "2bb6a24aa0fc6c484100f5d51a29bbad841cd2c755f5d93faa204e5dbb4eb2b4",
+    "mode": "0o644",
+    "bytes": 30
+  },
+  ".github/FUNDING.yml": {
+    "sha256": "6dd38a9f9b42964dc90d18fbfc7d043fc91ecdb2a2a3d688c24f7cfb81289c84",
+    "mode": "0o644",
+    "bytes": 25
+  },
+  ".github/copilot-instructions.md": {
+    "sha256": "571275b654460fbba63d685c69b3fde422a0a82d69b814561f878797ae9adae1",
+    "mode": "0o644",
+    "bytes": 2495
+  },
+  ".github/plugin/marketplace.json": {
+    "sha256": "97b047d980151edf9cb556d0d33a8ac7958f1c676b959756e90ba088e92dcbdd",
+    "mode": "0o644",
+    "bytes": 610
+  },
+  ".github/plugin/plugin.json": {
+    "sha256": "0535b041fc800f952a78e6eeedc0acd459811c7e83ef762bd58039d026f0ecc1",
+    "mode": "0o644",
+    "bytes": 597
+  },
+  ".github/workflows/publish.yml": {
+    "sha256": "47688984e169aaf083c9b15a9a36cb0cb527d8f3530fc15c7f1f86546a1e89c2",
+    "mode": "0o644",
+    "bytes": 575
+  },
+  ".github/workflows/test.yml": {
+    "sha256": "8a2a78f0d335f4c784ca9a50ebe5f9e1a2bd3003deee2e6bf53392a9c35b8b3c",
+    "mode": "0o644",
+    "bytes": 712
+  },
+  ".gitignore": {
+    "sha256": "0b3458092a1062c92560eec69f09b7a4a1e3d7c659bae84d69e89315656255a7",
+    "mode": "0o644",
+    "bytes": 506
+  },
+  ".grok-plugin/marketplace.json": {
+    "sha256": "a7e737eeea40421801dd41264018ebaf0e755cd4676c8d14fd8995fa328055ce",
+    "mode": "0o644",
+    "bytes": 439
+  },
+  ".kiro/steering/ponytail.md": {
+    "sha256": "095ff0dcb9bc1da1afbec6cae3368c1a83488f7934ad857d880492e531cfb6d1",
+    "mode": "0o644",
+    "bytes": 2560
+  },
+  ".openclaw/skills/ponytail/SKILL.md": {
+    "sha256": "dd240060d5734a58fe2783916a63f9401fed75c5f87742dd663a66f9ed4c8c65",
+    "mode": "0o644",
+    "bytes": 5957
+  },
+  ".openclaw/skills/ponytail-audit/SKILL.md": {
+    "sha256": "baba579ec3261cef555797c06484b4374ff4febbdb3eb0b4333e6d92b3434f87",
+    "mode": "0o644",
+    "bytes": 1434
+  },
+  ".openclaw/skills/ponytail-debt/SKILL.md": {
+    "sha256": "b0281c1d96fa5acc411ab6bbc219802c5551ecc73f4e3be3a3b74ada78a84bcb",
+    "mode": "0o644",
+    "bytes": 1499
+  },
+  ".openclaw/skills/ponytail-gain/SKILL.md": {
+    "sha256": "6268baa130520efa48406ee9463e0c844cbfea9a299a4687b1adf8352f2471f6",
+    "mode": "0o644",
+    "bytes": 1853
+  },
+  ".openclaw/skills/ponytail-help/SKILL.md": {
+    "sha256": "be2bab79e073c0cc5d58f21a4e2d5bdfdaa3baec832d9575493636752b79161b",
+    "mode": "0o644",
+    "bytes": 2733
+  },
+  ".openclaw/skills/ponytail-review/SKILL.md": {
+    "sha256": "76addbc1c5293d5a2da42828f4bff1cee5050492d06c194354df2f6329398df5",
+    "mode": "0o644",
+    "bytes": 2118
+  },
+  ".opencode/command/ponytail-audit.md": {
+    "sha256": "6278f820b117a6a57e4c0b013906e06fe4719652e6adc4b9a1b868d6bd1ba6f2",
+    "mode": "0o644",
+    "bytes": 587
+  },
+  ".opencode/command/ponytail-debt.md": {
+    "sha256": "ddbadb1f484a1ecc54ed577b80aa3f7b326ccd1ae2a35159652a52221eb31301",
+    "mode": "0o644",
+    "bytes": 689
+  },
+  ".opencode/command/ponytail-gain.md": {
+    "sha256": "33514a67319e30072e1daeef336b4f4af8de31ef25595a23353f0719004189b2",
+    "mode": "0o644",
+    "bytes": 897
+  },
+  ".opencode/command/ponytail-help.md": {
+    "sha256": "3052afd5cc1ea528d9405729b2620d1b81c36ca3287ec1ae964a68d6feb4c178",
+    "mode": "0o644",
+    "bytes": 1141
+  },
+  ".opencode/command/ponytail-review.md": {
+    "sha256": "ff09bd42b1d23bd3e3919c6b7ab4710c0a71b04e23c0fc30fb3c1b1b50451485",
+    "mode": "0o644",
+    "bytes": 510
+  },
+  ".opencode/command/ponytail.md": {
+    "sha256": "800919b5c7b53f05e9adb96e5978818f3b5cd9137bc2df35b1575590d5464f14",
+    "mode": "0o644",
+    "bytes": 547
+  },
+  ".opencode/plugins/ponytail-frontmatter.cjs": {
+    "sha256": "36073b0749a62bebadb22c01b7fc018d063fb20b337591269008051151a1513d",
+    "mode": "0o644",
+    "bytes": 1054
+  },
+  ".opencode/plugins/ponytail.mjs": {
+    "sha256": "e9e2214149ace3e589a584a27136bf5bd9da558fbad948f8cf1d3bc2c50d3828",
+    "mode": "0o644",
+    "bytes": 3773
+  },
+  ".qoder/rules/ponytail.md": {
+    "sha256": "571275b654460fbba63d685c69b3fde422a0a82d69b814561f878797ae9adae1",
+    "mode": "0o644",
+    "bytes": 2495
+  },
+  ".qoder-plugin/plugin.json": {
+    "sha256": "e7fc225b314dbbe13cdb72229c535708c7c24285d1c02944c6ea03bb3093aff4",
+    "mode": "0o644",
+    "bytes": 602
+  },
+  ".windsurf/rules/ponytail.md": {
+    "sha256": "571275b654460fbba63d685c69b3fde422a0a82d69b814561f878797ae9adae1",
+    "mode": "0o644",
+    "bytes": 2495
+  },
+  "AGENTS.md": {
+    "sha256": "b57f736a83ddab7111d752008c3e131a157e646a6b47c9eb223f076c494685a8",
+    "mode": "0o644",
+    "bytes": 2593
+  },
+  "LICENSE": {
+    "sha256": "fb1bc6909ac3ef82d5c22106e32ef682b0cff66788fa915fb9b53b15c9d2f3ab",
+    "mode": "0o644",
+    "bytes": 1071
+  },
+  "README.es.md": {
+    "sha256": "20483206fc9e2c040e21d1bb430a08f8860e3b20624e9727b4e1c56e7f20d985",
+    "mode": "0o644",
+    "bytes": 17752
+  },
+  "README.ko.md": {
+    "sha256": "518f9c42d46adce842f19e30ff10f25feeae07ebc397119a8b5c0bb2a7f82285",
+    "mode": "0o644",
+    "bytes": 19743
+  },
+  "README.md": {
+    "sha256": "52b5a75d5f5ba323b3aed53f06edeef31f7b05a5937c8d633ca7899dc4a9ee5c",
+    "mode": "0o644",
+    "bytes": 21610
+  },
+  "__init__.py": {
+    "sha256": "89ded80a6d8af5e4b77d85cc924f75a9be82af5a8ae379f176584e91fedd11e5",
+    "mode": "0o644",
+    "bytes": 7865
+  },
+  "after-install.md": {
+    "sha256": "accef47b5faf1d41519f05eddc93d47cf41671f86426d3e6127998df749b4293",
+    "mode": "0o644",
+    "bytes": 662
+  },
+  "assets/benchmark-3model.svg": {
+    "sha256": "e7bf079888a6908713654e802c0077bfd0d74b09ecb6bdadae7d407cde79812a",
+    "mode": "0o644",
+    "bytes": 2753
+  },
+  "assets/benchmark-agentic.svg": {
+    "sha256": "f39a8ce13a50983a7a182a30dc7d8af48d55ee29a37c9c0dbb7a62d866bc0a9c",
+    "mode": "0o644",
+    "bytes": 6295
+  },
+  "assets/logo-dark.png": {
+    "sha256": "c6f885b6a1f21d663d732365d4a212ca3e7de242be6c69dcd10c291d5b3896dc",
+    "mode": "0o644",
+    "bytes": 132499
+  },
+  "assets/logo-dark.svg": {
+    "sha256": "6d44c19762e347b32cc32ae3f534a403ad1ff05c905f98a224bda6f63613af5c",
+    "mode": "0o644",
+    "bytes": 86402
+  },
+  "assets/logo-greenpt-dark.svg": {
+    "sha256": "eda70f9cb920c89468f17efe45ab5bff19008704ef73b0ef45d100df78502665",
+    "mode": "0o644",
+    "bytes": 5851
+  },
+  "assets/logo-greenpt.svg": {
+    "sha256": "4be21fea3b132e6ccbef3a3ee8194eb9dcbd2a14b0959eca39940d8df92c8cd3",
+    "mode": "0o644",
+    "bytes": 5851
+  },
+  "assets/logo.png": {
+    "sha256": "818905aa5c99519b4e648fee82828c97dbeb471603335c990605dfe29b966121",
+    "mode": "0o644",
+    "bytes": 567655
+  },
+  "assets/social-preview.png": {
+    "sha256": "e8f47b2d88ebecea70a3fe3c1dcefe6c70d6ef980449bf5aab9cc21861ff3b1f",
+    "mode": "0o644",
+    "bytes": 59380
+  },
+  "assets/waitlist-banner-es.png": {
+    "sha256": "7f2a79e6dd6440bfb017144ca6a6f078e8ea70971ac80db1afed5fe13cffd828",
+    "mode": "0o644",
+    "bytes": 70620
+  },
+  "assets/waitlist-banner-ko.png": {
+    "sha256": "ed56ea519b593da66a7cb86fa915f7ade6413036a2c288f5c71d37cf46744034",
+    "mode": "0o644",
+    "bytes": 67380
+  },
+  "assets/waitlist-banner.png": {
+    "sha256": "03ff8fa0292324c112fb1f72864570ec9fb3d09399e578ace5e5f66e74eea4cc",
+    "mode": "0o644",
+    "bytes": 69148
+  },
+  "benchmarks/README.md": {
+    "sha256": "f7ae92ac949199060a09d44a68211d375725cbb85c8c5ecdb23af114d48aec23",
+    "mode": "0o644",
+    "bytes": 6202
+  },
+  "benchmarks/agentic/README.md": {
+    "sha256": "1df410888cf4785e1180d12ca78c3ea419671990e1aeded14d329a4a655f5b3b",
+    "mode": "0o644",
+    "bytes": 10164
+  },
+  "benchmarks/agentic/complete.py": {
+    "sha256": "2730deb3fd49439c38a8e8ba66c80f18d6b8ea33902247e393fae177f24352cf",
+    "mode": "0o644",
+    "bytes": 7944
+  },
+  "benchmarks/agentic/judge.py": {
+    "sha256": "c845548290c062dac5bef93ba3231e26b35be62a07fdebabec61833c4a20b6c0",
+    "mode": "0o644",
+    "bytes": 9987
+  },
+  "benchmarks/agentic/run.py": {
+    "sha256": "88c105299b38850c6d944a11faac7b0e18de2f5c9a3e5f4ae1f6b641d6853811",
+    "mode": "0o644",
+    "bytes": 26677
+  },
+  "benchmarks/agentic/tasks.py": {
+    "sha256": "68f473557695f69a036cd6fdb5d8e9ec51aef407183416545b29823c1e3190a2",
+    "mode": "0o644",
+    "bytes": 50646
+  },
+  "benchmarks/arms/baseline.js": {
+    "sha256": "ef0f81f670425705ab3195609947aa64890890cb078d7669780afe2228da8740",
+    "mode": "0o644",
+    "bytes": 113
+  },
+  "benchmarks/arms/caveman-SKILL.md": {
+    "sha256": "09ebdef35a85d058f8eba04c6a3d91079ac8dabc3d45d265694f128c808f7648",
+    "mode": "0o644",
+    "bytes": 3654
+  },
+  "benchmarks/arms/caveman.js": {
+    "sha256": "b3793a7549c9217e9e9b89b2ed5e94813a9c71297386c77a177d4e2ef3e13d1a",
+    "mode": "0o644",
+    "bytes": 315
+  },
+  "benchmarks/arms/ponytail.js": {
+    "sha256": "9091a2e794ad1c5c7c4c9b68a3bb4aa995fcce6d0f09aad37a2febdd95640b82",
+    "mode": "0o644",
+    "bytes": 373
+  },
+  "benchmarks/behavior.js": {
+    "sha256": "9364957a4fade600cd423098e115e2187d12ebcaefc54900f4b368819f33efd2",
+    "mode": "0o644",
+    "bytes": 2785
+  },
+  "benchmarks/behavior.yaml": {
+    "sha256": "7f0edb875c56872fa14707a5e096a0f951dfc0b5f6de82fb7bfe505b9fd45c4f",
+    "mode": "0o644",
+    "bytes": 1685
+  },
+  "benchmarks/benchmark-local.py": {
+    "sha256": "b358c8e09862d10a10d89911826b2a52c3e55607f79748647de683460da9b40b",
+    "mode": "0o644",
+    "bytes": 6173
+  },
+  "benchmarks/claude-email.js": {
+    "sha256": "cc7522ff336d5a9fe512a8cd4baf6d63c36f352cb95830baef91df77fcb1f1ac",
+    "mode": "0o644",
+    "bytes": 1952
+  },
+  "benchmarks/correctness.js": {
+    "sha256": "7a17d8c904eab1813a220279c31ef51598214735923d178bed9beb92e9cf0230",
+    "mode": "0o644",
+    "bytes": 10228
+  },
+  "benchmarks/correctness.test.js": {
+    "sha256": "74a18b824fa0a0de7dc8d1ce210a9b5f4d2813ab77659c3e1ac5e28175b5c3e4",
+    "mode": "0o644",
+    "bytes": 1583
+  },
+  "benchmarks/generate-examples.mjs": {
+    "sha256": "d5a19365c82a6610a0ac6bf4f48e39152e2672815c2f8395abb4d9702895b727",
+    "mode": "0o644",
+    "bytes": 2566
+  },
+  "benchmarks/loc.js": {
+    "sha256": "c3c346f836eec0ba759a100a5c1166be2362fcf37017470f3c9f9b872ab44234",
+    "mode": "0o644",
+    "bytes": 935
+  },
+  "benchmarks/loc.test.js": {
+    "sha256": "3cf26acd453353a10fee915062c19368deddcad651bbe3eff5f8f7e764acf9ed",
+    "mode": "0o644",
+    "bytes": 1203
+  },
+  "benchmarks/model-email.js": {
+    "sha256": "21e8c1af22835646b7a4b9b3897231e64ba8d1477df2d08e1e0922ff7d62cc4b",
+    "mode": "0o644",
+    "bytes": 1924
+  },
+  "benchmarks/promptfooconfig.gemini.yaml": {
+    "sha256": "2c1578b259fc3efb755d1c1534f2a01ebe75ea05e6fc2cd6701ea68e99affce6",
+    "mode": "0o644",
+    "bytes": 1400
+  },
+  "benchmarks/promptfooconfig.gpt-newest.yaml": {
+    "sha256": "e3bcfbf34eb148d81bfd3c985d88ea7e7f71c9989b74b9588c8136488ed18f72",
+    "mode": "0o644",
+    "bytes": 1399
+  },
+  "benchmarks/promptfooconfig.gpt.yaml": {
+    "sha256": "1e196e71efc3c77c54efb10d58634a9e1d1fe58c7e8755ee712825e1c6b940fb",
+    "mode": "0o644",
+    "bytes": 1390
+  },
+  "benchmarks/promptfooconfig.yaml": {
+    "sha256": "fc292f68c5727f306f5ba1ce74b161631e416ce71b66a67d9241a59556c3e00d",
+    "mode": "0o644",
+    "bytes": 1815
+  },
+  "benchmarks/prompts.json": {
+    "sha256": "6137aae013b057d38c90b38af17e6b22d57011b85d0be5d549045df196fa37ac",
+    "mode": "0o644",
+    "bytes": 1029
+  },
+  "benchmarks/results/2026-06-12-caveman-vs-ponytail.md": {
+    "sha256": "ce2e88d119f89d6f815349d60c48750c99f58b3df0a0b29adca60b07d1a9b319",
+    "mode": "0o644",
+    "bytes": 3658
+  },
+  "benchmarks/results/2026-06-12-v4-hardening-vs-caveman.md": {
+    "sha256": "d7792afb3d61ae7ca33113782263a208095895af8e2e9499031a2647a031cd22",
+    "mode": "0o644",
+    "bytes": 6758
+  },
+  "benchmarks/results/2026-06-15-llama3.2-local.md": {
+    "sha256": "0b9f8680096976acdadca4004907c389b690ff2dfa62c3799c9c83bc02f6d275",
+    "mode": "0o644",
+    "bytes": 3167
+  },
+  "benchmarks/results/2026-06-16-correctness-gate-fix.md": {
+    "sha256": "d32842d4d0cbb9f1ffd4510db1f9501ad673f61e08ccb355fd9d16129765fd82",
+    "mode": "0o644",
+    "bytes": 5284
+  },
+  "benchmarks/results/2026-06-16-robustness-audit.md": {
+    "sha256": "e00526784e8f3286e43ed767b36a6a6d17ac2cd40f7402e0eceb5f9ecd6b7db9",
+    "mode": "0o644",
+    "bytes": 6509
+  },
+  "benchmarks/results/2026-06-17-agentic-safety.md": {
+    "sha256": "57006a1f5ead7a2fb1c4c8edc83c6ec38ae20dbd9616fb9d4ac4f1515d24d920",
+    "mode": "0o644",
+    "bytes": 8109
+  },
+  "benchmarks/results/2026-06-17-cost-verification.md": {
+    "sha256": "bb32d42e5879bd0eace8169136814fe1fed0cbfb517698e6c845cb22229b0c21",
+    "mode": "0o644",
+    "bytes": 4849
+  },
+  "benchmarks/results/2026-06-18-agentic.md": {
+    "sha256": "fe274964a4f2b9801e67ba956eef3a029c472aa5693b7e0643c83bd406f9ee6f",
+    "mode": "0o644",
+    "bytes": 12226
+  },
+  "benchmarks/results/2026-06-22-issue-245-217-comprehension.md": {
+    "sha256": "0ae799564d9a63576701e1b875682b482d8644c2eb713e8ff68602d99d55e86f",
+    "mode": "0o644",
+    "bytes": 5566
+  },
+  "benchmarks/robustness-audit.js": {
+    "sha256": "e9a7e9eb6b087e60e2fed07e61370fbd1bfca76b16bb95c86170cffedcebff96",
+    "mode": "0o644",
+    "bytes": 14150
+  },
+  "commands/ponytail-audit.toml": {
+    "sha256": "4b92393d6fc4cf0fce16e60c7425314b7ba298c19d6a394f32046ae01c84e843",
+    "mode": "0o644",
+    "bytes": 592
+  },
+  "commands/ponytail-debt.toml": {
+    "sha256": "355dc9e9df1bc349b47a33abb68f1cd28a5f801877e904b17fc6b18d7542ef7f",
+    "mode": "0o644",
+    "bytes": 695
+  },
+  "commands/ponytail-gain.toml": {
+    "sha256": "802751e4d25187b8ce5205d0738fcf285d29606e42fa6d97613ee9f276589f3d",
+    "mode": "0o644",
+    "bytes": 902
+  },
+  "commands/ponytail-help.toml": {
+    "sha256": "4d7288eee201b4303d0eb51bab6534ca8536431d828afb6dd338faf6523fe27e",
+    "mode": "0o644",
+    "bytes": 1152
+  },
+  "commands/ponytail-review.toml": {
+    "sha256": "11cf252cdef88c6d301f4b1d0d5b9b9678d44fc0bd88e00cae08e31c9e757280",
+    "mode": "0o644",
+    "bytes": 515
+  },
+  "commands/ponytail.toml": {
+    "sha256": "7651fd868658dc4ea28075e7ded5571786002d1bc3256fa123219d2e6163b404",
+    "mode": "0o644",
+    "bytes": 550
+  },
+  "docs/agent-portability.md": {
+    "sha256": "f8fd619608f116807886055343ec1a3f20edbaf95579d88881df0b95b5bac5e2",
+    "mode": "0o644",
+    "bytes": 6188
+  },
+  "docs/platform-native.md": {
+    "sha256": "d6162756cbf78a9d8ff9f049627defa6370c1415aef7f1ee5f36ae862012b533",
+    "mode": "0o644",
+    "bytes": 9434
+  },
+  "examples/README.md": {
+    "sha256": "7ddc7d14b398b9e6cdfb34e3e7f69d9e51cbd7cea8902c6a7c5857af10161a07",
+    "mode": "0o644",
+    "bytes": 771
+  },
+  "examples/csv-sum.md": {
+    "sha256": "3e0ba36601b03f6d26b9afafe791d9332d4159ac865e345840d9b187bd823f78",
+    "mode": "0o644",
+    "bytes": 1742
+  },
+  "examples/debounce.md": {
+    "sha256": "1474e43fa0912bd019cea93139bdabdbbb8da969759e1940fa392ada947a553f",
+    "mode": "0o644",
+    "bytes": 5109
+  },
+  "examples/deep-clone.md": {
+    "sha256": "ad4757547d5cb547d14398e150217b751a7601ef1d6298c1ba20327299d80eac",
+    "mode": "0o644",
+    "bytes": 783
+  },
+  "examples/email-validation.md": {
+    "sha256": "b8467925f6db86c9d8a4038ea4148b7ff882fc77f2597d7310075c22669f3485",
+    "mode": "0o644",
+    "bytes": 4621
+  },
+  "examples/group-by.md": {
+    "sha256": "6a9484027698d3eef9fc383942c1b57635f607e6b4df6c877dca5556ad2df6b4",
+    "mode": "0o644",
+    "bytes": 937
+  },
+  "examples/infinite-scroll.md": {
+    "sha256": "38f6586e18dab81988346c31555a31dc8044c9171da0e79c548f778acf7d245f",
+    "mode": "0o644",
+    "bytes": 1498
+  },
+  "examples/modal-dialog.md": {
+    "sha256": "4248e9371f46d8d15358caacf99ee6b001863cdbce572bdcadb03677c3ffa398",
+    "mode": "0o644",
+    "bytes": 1962
+  },
+  "examples/number-formatting.md": {
+    "sha256": "599a9d2f5af00489fd7cbed813b429a7ff43abaac433c9db48495c6f457cc203",
+    "mode": "0o644",
+    "bytes": 1049
+  },
+  "examples/rate-limit.md": {
+    "sha256": "4231ef65b39752973b0d9d3fb1f49877527545a7eac01ee77c3a47808404ce85",
+    "mode": "0o644",
+    "bytes": 7055
+  },
+  "examples/react-countdown.md": {
+    "sha256": "1109af1dfba055d6a4e9538f90be1d5c204d601389e4148717af705c941ca3b9",
+    "mode": "0o644",
+    "bytes": 8998
+  },
+  "examples/url-params.md": {
+    "sha256": "c6e6fdd2cc625fdd77c1140beea706f6c60fa638f14b9052fb02ac5890ca503b",
+    "mode": "0o644",
+    "bytes": 1057
+  },
+  "gemini-extension.json": {
+    "sha256": "2ce1e6ae8bf944b4425eb5536fd857724bf33eda3f4d425e64db61f834736ac7",
+    "mode": "0o644",
+    "bytes": 233
+  },
+  "hooks/claude-codex-hooks.json": {
+    "sha256": "25f1af0c65db50fcc3b7c7e7535144a3ce2303d79c1a83feedf31bc4ce8673b1",
+    "mode": "0o644",
+    "bytes": 966
+  },
+  "hooks/copilot-hooks.json": {
+    "sha256": "8ca43eef5316694ab7289cbec1c71e3dc04a45741c7a4d8f620e4bad6ab96785",
+    "mode": "0o644",
+    "bytes": 539
+  },
+  "hooks/ponytail-activate.js": {
+    "sha256": "1c428c4ee9687c2f4321924109ee92e8f8b06fd6600cb6be9ec5b59633cafab1",
+    "mode": "0o644",
+    "bytes": 3957
+  },
+  "hooks/ponytail-config.js": {
+    "sha256": "0a8daf96cf9ac703dc4cb7b5065253567e513c951d60b8eb94a0fe727514aeca",
+    "mode": "0o644",
+    "bytes": 5881
+  },
+  "hooks/ponytail-instructions.js": {
+    "sha256": "23c050103f28dbe6bad953ae21d98cd06d720a20f33d4716e9de419f947d495e",
+    "mode": "0o644",
+    "bytes": 5487
+  },
+  "hooks/ponytail-mode-tracker.js": {
+    "sha256": "5d1a960ff01b73f651ec0242052a8cf1e064cb88147806bf6e13f92798aca251",
+    "mode": "0o644",
+    "bytes": 5318
+  },
+  "hooks/ponytail-runtime.js": {
+    "sha256": "02fa6127cf6c4b65a7b07b66541677ea587a0691802b6d1d2be2419bccea9110",
+    "mode": "0o644",
+    "bytes": 3249
+  },
+  "hooks/ponytail-statusline.ps1": {
+    "sha256": "6138f15bc7651ee7e5ced2a2a2280f5c810d58cad3e9f3252c628f4c923e48c9",
+    "mode": "0o644",
+    "bytes": 885
+  },
+  "hooks/ponytail-statusline.sh": {
+    "sha256": "f1dbfa5997a5d4b5339619709053eff557ab16d71af75eb3041c3d3e3dca42ec",
+    "mode": "0o644",
+    "bytes": 696
+  },
+  "hooks/ponytail-subagent.js": {
+    "sha256": "7f6bee86702a488d29ef0dcaabf424bbe2aca345a6a642319d43a1fe0276792e",
+    "mode": "0o644",
+    "bytes": 2683
+  },
+  "hooks/qoder-hooks.json": {
+    "sha256": "7f8f4be7d5f4c7db6a1b48f2274210a10dd3d3b884b4805c034e03a0b463e93f",
+    "mode": "0o644",
+    "bytes": 704
+  },
+  "opencode.json": {
+    "sha256": "e922d7e549d937fd1b057e75611be35d7e27e52c47e86b41073c3a5f32aedc59",
+    "mode": "0o644",
+    "bytes": 101
+  },
+  "package.json": {
+    "sha256": "5f7e5ab891c31ae006b986d34e0977fda44fc54e654cc4e07531dd5dd6f96b8f",
+    "mode": "0o644",
+    "bytes": 1251
+  },
+  "pi-extension/index.js": {
+    "sha256": "67f12660b2279922adcefd6c112b851830dc1d9b2c9f240b190c849d33e837b3",
+    "mode": "0o644",
+    "bytes": 7171
+  },
+  "pi-extension/package.json": {
+    "sha256": "376677d0d7d7846e7e521fc14f129e41cdbb60f0018834f34d3ef638f30e4be0",
+    "mode": "0o644",
+    "bytes": 144
+  },
+  "pi-extension/test/extension.test.js": {
+    "sha256": "c79a8f4c377375c47f2528c63819ff126d41ccb470368ef2ee2727ffb137e8b1",
+    "mode": "0o644",
+    "bytes": 10058
+  },
+  "pi-extension/test/helpers.test.js": {
+    "sha256": "4c97ba0ad9cd26c9138e513afc2a2a9fcd0179cac1ccf754be8b9ef5c673f525",
+    "mode": "0o644",
+    "bytes": 7213
+  },
+  "plugin.json": {
+    "sha256": "6efc6b6c8e6e33625f9a27574f27a4d453179bcf534b09c430b00814ecbc98f3",
+    "mode": "0o644",
+    "bytes": 25
+  },
+  "plugin.yaml": {
+    "sha256": "f91f25a04ef65528a8b3ef9fd88576d1bb520ccda54a55ef89a24b619faee0f9",
+    "mode": "0o644",
+    "bytes": 467
+  },
+  "ponytail-mcp/README.md": {
+    "sha256": "2a307e1e89cfb7946130d02f431c6ced35a6aabc822ed04354f3b077383d148a",
+    "mode": "0o644",
+    "bytes": 1507
+  },
+  "ponytail-mcp/index.js": {
+    "sha256": "230150e045226da8ee0309d846bd912cd48feb7c8d5335eebd733e267ffd8b52",
+    "mode": "0o644",
+    "bytes": 1922
+  },
+  "ponytail-mcp/instructions.js": {
+    "sha256": "d43956868c3536ac3f9e4e14fbbe83ee8ebad8ec9e97f466ad0dc2ef59a9b2a7",
+    "mode": "0o644",
+    "bytes": 1181
+  },
+  "ponytail-mcp/package.json": {
+    "sha256": "edcf1d8e4ccdb5b4e41792675dfa8adebc0cb2841312e02ed402a601f1aa13d2",
+    "mode": "0o644",
+    "bytes": 364
+  },
+  "ponytail-mcp/test/instructions.test.js": {
+    "sha256": "45fb3312ecf3c63689a827a60534ba5b018ee319b905b6c3073bb1f2728cfac8",
+    "mode": "0o644",
+    "bytes": 909
+  },
+  "scripts/build-openclaw-skills.js": {
+    "sha256": "6fe45688e2c2d3e2df0a784be59891edf7cdd4b83f4203e4dda7d5d1a953a1d3",
+    "mode": "0o644",
+    "bytes": 2873
+  },
+  "scripts/check-rule-copies.js": {
+    "sha256": "e7540a86fc80cdd3b0f6c7a332f60b360569342270ce3dd7ec204f7370e5a784",
+    "mode": "0o644",
+    "bytes": 2981
+  },
+  "scripts/check-versions.js": {
+    "sha256": "8d8cc8322a15ea5ae4d3342fa5c80b9cd50a6da947bdebcc81a9265da1cd8d56",
+    "mode": "0o644",
+    "bytes": 3310
+  },
+  "scripts/publish-openclaw-skills.js": {
+    "sha256": "f2b7a2afd46bccb91ad0511f5ef8df7702dd7ef1306f2975fed6a97a2b0a6769",
+    "mode": "0o644",
+    "bytes": 3088
+  },
+  "scripts/uninstall.js": {
+    "sha256": "4ad0ebc58751706f5978c7c2177c0652c986b799a63e6a04effc9eb8d33048ee",
+    "mode": "0o644",
+    "bytes": 2459
+  },
+  "skills/ponytail/SKILL.md": {
+    "sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+    "mode": "0o644",
+    "bytes": 6637
+  },
+  "skills/ponytail-audit/SKILL.md": {
+    "sha256": "5560b8e383dbe2ddfddc873a1e2bf2e586e23e0cd7d995537482b2315331f6d1",
+    "mode": "0o644",
+    "bytes": 1652
+  },
+  "skills/ponytail-debt/SKILL.md": {
+    "sha256": "c84fba75f0ca12bfe83f9a78ea02fd125c5dd3f1fbb18124105a489937f284e6",
+    "mode": "0o644",
+    "bytes": 1703
+  },
+  "skills/ponytail-gain/SKILL.md": {
+    "sha256": "24e01d1c9715cb136ba1c4f1e52a95940c0193558b876828e537736480d6408b",
+    "mode": "0o644",
+    "bytes": 1973
+  },
+  "skills/ponytail-help/SKILL.md": {
+    "sha256": "2264d1615117b02b0fd5a69ec84cd2757006471a78e4d6c22eed6d581c1d37a4",
+    "mode": "0o644",
+    "bytes": 2796
+  },
+  "skills/ponytail-review/SKILL.md": {
+    "sha256": "40df33b58fc6ef889b93585733feb9566b76e9586efa7f376785c1e995197ac0",
+    "mode": "0o644",
+    "bytes": 2383
+  },
+  "tests/behavior.test.js": {
+    "sha256": "564838bed603f0149ecf749c9bae1c0f3b63c64134e48ebdd5e0a88086a81d75",
+    "mode": "0o644",
+    "bytes": 3196
+  },
+  "tests/commands.test.js": {
+    "sha256": "cb0efff4b544b656cea3aec2579620b2bf82066fd90d61319aa6b0b02105bb55",
+    "mode": "0o644",
+    "bytes": 1489
+  },
+  "tests/copilot-plugin.test.js": {
+    "sha256": "38769d78562f78319fbbe351fb23d357c4395210a12712e95904855793a1173d",
+    "mode": "0o644",
+    "bytes": 1049
+  },
+  "tests/correctness.test.js": {
+    "sha256": "277ae98920af28888a5bdee5c6db69f524627c337b74a229f12c5bbab0ecba52",
+    "mode": "0o644",
+    "bytes": 6382
+  },
+  "tests/gemini-extension.test.js": {
+    "sha256": "b64d526bf0d0262b787d5343479b2cc6a029f4760623a5f2a4b4e29a02a88959",
+    "mode": "0o644",
+    "bytes": 3748
+  },
+  "tests/grok-plugin.test.js": {
+    "sha256": "5e4193f5aad1fb3143ae569094aa661cb2d082175d029bf25672bdb5301b0543",
+    "mode": "0o644",
+    "bytes": 1198
+  },
+  "tests/hermes-plugin.test.js": {
+    "sha256": "49395b99b8272d46fc99d35655a68128efcf2abc702465c8f8ea9df8a60dc4ea",
+    "mode": "0o644",
+    "bytes": 9613
+  },
+  "tests/hooks-windows.test.js": {
+    "sha256": "358155737a4d65fc36c21faf240c656a7c61746fdc935e7b411a81b1ed3cff64",
+    "mode": "0o644",
+    "bytes": 5596
+  },
+  "tests/hooks.test.js": {
+    "sha256": "02d7c3a34a9eb4114b1aa58cff313b8d58ce1558a309184f04c34c16a12f41e5",
+    "mode": "0o644",
+    "bytes": 20957
+  },
+  "tests/openclaw-skills.test.js": {
+    "sha256": "c92ee653ba1d5d0d28dfb1f386760ee8afc8d0dd5dba0d1b1865fa6b51ab9b06",
+    "mode": "0o644",
+    "bytes": 1219
+  },
+  "tests/opencode-plugin.test.js": {
+    "sha256": "c4549ca1445adc987e8378236628ae9c57798f819322b68a15be896bb4437db6",
+    "mode": "0o644",
+    "bytes": 4924
+  },
+  "tests/package-scripts.test.js": {
+    "sha256": "b72f4ff8d484046162f95116ff4181cfd789ee5166d697de317f29e36c6d48f5",
+    "mode": "0o644",
+    "bytes": 923
+  },
+  "tests/package.test.js": {
+    "sha256": "e6d008916734c8c9c400c6f225a45cb113b30540fe2d5f167ef333779ba29892",
+    "mode": "0o644",
+    "bytes": 863
+  },
+  "tests/qoder-plugin.test.js": {
+    "sha256": "5f54746b8e189189c9138b1ff0acde5375f130b5ecd010fe2899f201861152e8",
+    "mode": "0o644",
+    "bytes": 3698
+  },
+  "tests/uninstall.test.js": {
+    "sha256": "19c83a170392a1eeb23bab2b16d0441735c8be7c923b291a57149ac5bcad660c",
+    "mode": "0o644",
+    "bytes": 3947
+  }
+}
