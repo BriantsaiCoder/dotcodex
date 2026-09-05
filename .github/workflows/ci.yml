@@ -30,6 +30,9 @@ jobs:
               || { echo "::error file=$f::TOML 解析失敗"; exit 1; }
           done
 
+      - name: Ponytail downstream patch
+        run: bash tests/ponytail-fork.sh
+
       - name: global config ownership
         run: bash tests/global-config-ownership.sh
 

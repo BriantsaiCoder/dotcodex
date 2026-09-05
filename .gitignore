@@ -2,6 +2,7 @@
 # 追蹤原則：手寫或生成的「設定與指令檔」→ 追蹤；app 自管 state / 憑證 / DB / session / cache / log → 排除
 *
 !.gitignore
+!.gitattributes
 !AGENTS.md
 !hooks.json
 !hooks/
@@ -22,3 +23,23 @@
 # stitch.env — 明文 secret（chmod 600；config.toml 以 env_http_headers 引用其 env var 名）
 # config.toml — key 已外部化後仍不追蹤：marketplaces 區塊為 app 自管 state（高頻改寫）
 # auth.json / *.sqlite / history.jsonl / log/ / sessions/ — 憑證與 runtime state
+
+# Reviewed Ponytail downstream patch and its exact baseline; runtime payload stays ignored.
+!maintenance/
+!maintenance/ponytail/
+!maintenance/ponytail/README.md
+!maintenance/ponytail/LICENSE
+!maintenance/ponytail/ponytail.patch
+!maintenance/ponytail/baseline-manifest.json
+!maintenance/ponytail/base/
+!maintenance/ponytail/base/hooks/
+!maintenance/ponytail/base/hooks/ponytail-instructions.js
+!maintenance/ponytail/base/skills/
+!maintenance/ponytail/base/skills/ponytail/
+!maintenance/ponytail/base/skills/ponytail/SKILL.md
+!maintenance/ponytail/.agents/
+!maintenance/ponytail/.agents/plugins/
+!maintenance/ponytail/.agents/plugins/marketplace.json
+!maintenance/ponytail/model-evidence.json
+!maintenance/ponytail/exposure.json
+!maintenance/ponytail/exposure-evidence.json

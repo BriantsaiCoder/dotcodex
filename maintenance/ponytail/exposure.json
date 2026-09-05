@@ -1,0 +1,18 @@
+{
+  "disable_names": [
+    "codex:codex-cli-runtime",
+    "codex:codex-result-handling",
+    "codex:gpt-5-4-prompting",
+    "ponytail:ponytail-gain"
+  ],
+  "keep_plugins_enabled": [
+    "codex@openai-codex",
+    "ponytail@ponytail"
+  ],
+  "retain_conditional": [
+    "chrome:control-chrome",
+    "build-web-apps:react-best-practices",
+    "ponytail:ponytail-review"
+  ],
+  "reason": "Only supported Codex skill entries are suppressed; runtime/hooks/Claude rescue remain installed. Retain ponytail-review because the unchanged review-mode hook dispatch depends on its rules. Chrome capability and plugin React selection require separate runtime evidence."
+}

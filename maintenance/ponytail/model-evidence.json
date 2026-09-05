@@ -1,0 +1,602 @@
+{
+  "scope": "8 controlled CLI runs; high effort; runtime-generated Ponytail normal input injected as developer_instructions; not Desktop activation proof",
+  "runs": [
+    {
+      "group": "C-full",
+      "model": "gpt-5.6-sol",
+      "arm": "A",
+      "exit": 0,
+      "seconds": 110.7,
+      "prompt": "這是隔離 canary。技能正本只在本 repo 的 .agents/skills；全域規則提到 ~/.agents/skills 時改讀此處，不能讀 live 原版或其他工作區。維持本次指定的模型、effort 與既有工具，不需要網路、記憶或其他專案。\n請修正 app.py 的 normalize_label：None 回傳空字串，字串只 trim 並保留大小寫，其他型別明確拋 TypeError。完成這三項行為，保留所有 callers 的相容性。這是 local-only fixture；請完成適用的既有驗證。",
+      "injected_sha256": "da4fb09cff2f6726691ce6591cebc38c95597d79da132e49c6fa2665c4e8a3ff",
+      "answer": "已修正 [app.py](/private/tmp/skills-eval/C-full/A/gpt-5.6-sol/app.py)：`None → \"\"`、字串 trim 並保留大小寫、其他型別明確拋 `TypeError`。  \n新增 regression tests；`python3 -m unittest discover -v`：3 tests PASS，`git diff --check`：PASS。  \n5 個 callers 維持原介面，無需修改。",
+      "trace_sha256": "703a361098bfb9b73008b015484356a822da9a8db96b7abe847596ce98b6c87a",
+      "artifacts": "/private/tmp/skills-eval/C-full/A/gpt-5.6-sol",
+      "usage": {
+        "input_tokens": 356958,
+        "cached_input_tokens": 306688,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3136,
+        "reasoning_output_tokens": 1385
+      },
+      "tool_trace": [
+        {
+          "command": "/bin/zsh -lc \"pwd && if [ -f .agents/profile.md ]; then sed -n '1,240p' .agents/profile.md; fi && sed -n '1,260p' .agents/skills/dev-workflow/SKILL.md && sed -n '1,260p' .agents/skills/deps-check/SKILL.md\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,260p' .agents/skills/tdd/SKILL.md && sed -n '1,260p' .agents/skills/dev-workflow/references/authorization-matrix.md && sed -n '1,260p' .agents/skills/dev-workflow/references/evidence-integrity.md && sed -n '1,220p' .agents/skills/dev-workflow/references/host-adapters.md && git branch --show-current && git status --short && rg --files -g '\"'!/.git'\"' && sed -n '1,240p' app.py && rg -n \\\"normalize_label|pytest|unittest\\\" . --glob '\"'!/.git/**'\"'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'bash .agents/skills/deps-check/scripts/deps-check.sh app.py; deps_exit=$?; printf '\"'deps-check exit=%s\\\\n' \\\"\"'$deps_exit\"; sed -n '\"'1,200p' callers.py; sed -n '1,200p' test_app.py; rg -n \\\"from app import|import app|normalize_label\\\" --glob '*.py'; python -m unittest -v\"",
+          "exit_code": 127
+        },
+        {
+          "command": "/bin/zsh -lc 'command -v python3 && python3 --version && python3 -m unittest -v'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest -v'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest -v'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest -v'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest discover -v && git diff --check && git diff -- app.py test_app.py && git status --short -- app.py test_app.py'",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "group": "C-full",
+      "model": "gpt-6-astra",
+      "arm": "A",
+      "exit": 0,
+      "seconds": 100.7,
+      "prompt": "這是隔離 canary。技能正本只在本 repo 的 .agents/skills；全域規則提到 ~/.agents/skills 時改讀此處，不能讀 live 原版或其他工作區。維持本次指定的模型、effort 與既有工具，不需要網路、記憶或其他專案。\n請修正 app.py 的 normalize_label：None 回傳空字串，字串只 trim 並保留大小寫，其他型別明確拋 TypeError。完成這三項行為，保留所有 callers 的相容性。這是 local-only fixture；請完成適用的既有驗證。",
+      "injected_sha256": "da4fb09cff2f6726691ce6591cebc38c95597d79da132e49c6fa2665c4e8a3ff",
+      "answer": "已修正 [app.py](/private/tmp/skills-eval/C-full/A/gpt-6-astra/app.py)：`None → \"\"`、字串只 trim 並保留大小寫、其他型別明確拋 `TypeError`。\n`python3 -m unittest -v`：2 tests PASS，涵蓋全部五個 callers；`git diff --check` exit 0。\n僅本地修改；獨立 review SKIPPED（低風險小修），repo 缺少 bug-fix-settlement 技能，未執行該流程。",
+      "trace_sha256": "7f21a6b282551587040e2029aec195a92bf085cc3759e2576eacb27cd3a190f8",
+      "artifacts": "/private/tmp/skills-eval/C-full/A/gpt-6-astra",
+      "usage": {
+        "input_tokens": 226518,
+        "cached_input_tokens": 196736,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1915,
+        "reasoning_output_tokens": 461
+      },
+      "tool_trace": [
+        {
+          "command": "/bin/zsh -lc \"pwd; rg --files -g 'AGENTS.md' -g 'app.py' -g '*test*' -g 'pyproject.toml' -g 'pytest.ini' -g 'Makefile' -g '.agents/**' -g '.codex/**' -g 'requirements*' -g 'setup.cfg' -g 'tox.ini' --hidden\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'cat .agents/skills/dev-workflow/SKILL.md'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'cat .agents/skills/dev-workflow/references/authorization-matrix.md .agents/skills/dev-workflow/references/evidence-integrity.md .agents/skills/dev-workflow/references/host-adapters.md .agents/skills/tdd/SKILL.md .agents/skills/deps-check/SKILL.md'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"cat AGENTS.md app.py test_app.py; git status --short; git branch --show-current; rg -n --hidden -g '\"'!.git/**'\"' 'normalize_label' .; rg --files --hidden -g '\"'!.git/**'\"' -g '\"'!.agents/skills/**'\"'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'cat callers.py .agents/skills/deps-check/scripts/deps-check.sh .agents/skills/dev-workflow/references/ledgers.md'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'git rev-parse HEAD; git ls-files; python3 -m unittest -v'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"bash .agents/skills/deps-check/scripts/deps-check.sh app.py; rg -n --glob '*.py' 'normalize_label|consumer_|import|exec|eval|getattr' .\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest -v'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'git diff --check; git status --short; cat app.py test_app.py'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest -v'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'git diff --check'",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "group": "C-full",
+      "model": "gpt-5.6-sol",
+      "arm": "B",
+      "exit": 0,
+      "seconds": 170.9,
+      "prompt": "這是隔離 canary。技能正本只在本 repo 的 .agents/skills；全域規則提到 ~/.agents/skills 時改讀此處，不能讀 live 原版或其他工作區。維持本次指定的模型、effort 與既有工具，不需要網路、記憶或其他專案。\n請修正 app.py 的 normalize_label：None 回傳空字串，字串只 trim 並保留大小寫，其他型別明確拋 TypeError。完成這三項行為，保留所有 callers 的相容性。這是 local-only fixture；請完成適用的既有驗證。",
+      "injected_sha256": "bbf7cf927ea01adc54502da4a5c4e4c34941c80478d1c54c2e1624716cffa348",
+      "answer": "已完成 local-only 修正：\n\n- [app.py](/private/tmp/skills-eval/C-full/B/gpt-5.6-sol/app.py:1)：`None → \"\"`、字串僅 `strip()` 並保留大小寫、其他型別明確拋 `TypeError`。\n- [test_app.py](/private/tmp/skills-eval/C-full/B/gpt-5.6-sol/test_app.py:4)：補齊回歸測試。\n\n驗證：\n\n- `python3 -m unittest -v`：3 tests PASS，exit 0\n- 5 個既有 callers 相容性 probe：PASS，exit 0\n- `git diff --check`：PASS，exit 0\n- 三項 gitleaks 掃描：PASS，exit 0\n\n未 commit／push；既有 canary artifacts 保持未修改。",
+      "trace_sha256": "5c1ff5e73ab5e34b80db2fed56ee7c459a10914123cd15fd3c90a0a2eef89374",
+      "artifacts": "/private/tmp/skills-eval/C-full/B/gpt-5.6-sol",
+      "usage": {
+        "input_tokens": 582738,
+        "cached_input_tokens": 516352,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5374,
+        "reasoning_output_tokens": 2229
+      },
+      "tool_trace": [
+        {
+          "command": "/bin/zsh -lc \"pwd && rg --files -g 'profile.md' -g 'SKILL.md' -g 'app.py' -g '*test*' -g 'pyproject.toml' -g 'requirements*.txt' -g 'pytest.ini' -g 'tox.ini' -g 'AGENTS.md' . .agents\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,240p' .agents/skills/deps-check/SKILL.md\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,240p' .agents/skills/dev-workflow/SKILL.md\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'bash .agents/skills/deps-check/scripts/deps-check.sh app.py; rc=$?; echo \"deps_check_exit=$rc\"; exit $rc'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,260p' .agents/skills/tdd/SKILL.md && sed -n '1,280p' .agents/skills/tdd/tests.md\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,260p' .agents/skills/dev-workflow/references/authorization-matrix.md && sed -n '1,260p' .agents/skills/dev-workflow/references/evidence-integrity.md\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"git branch --show-current && git status --short && sed -n '1,240p' app.py && sed -n '1,280p' test_app.py\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n --hidden --glob '\"'!.git/**'\"' '\\\\bnormalize_label\\\\b' .; rc=\"'$?; echo \"rg_exit=$rc\"; exit $rc'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,220p' callers.py && git ls-files && git status --short\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python -m unittest test_app.LabelTests.test_none_becomes_empty_string'",
+          "exit_code": 127
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest test_app.LabelTests.test_none_becomes_empty_string'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest test_app.LabelTests.test_none_becomes_empty_string'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest test_app.LabelTests.test_other_types_raise_type_error'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest test_app.LabelTests.test_other_types_raise_type_error'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest -v'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,320p' .agents/skills/dev-workflow/references/dirty-review-package.md\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'git diff --cached --name-status\ngit diff --name-status\ngit ls-files --others --exclude-standard\ncommand -v gitleaks; rc=$?; echo \"gitleaks_probe_exit=$rc\"; exit 0'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'set +e\ngitleaks git --staged --redact --no-banner\nstaged_rc=$?\ngitleaks git --pre-commit --redact --no-banner\nprecommit_rc=$?\ngitleaks dir --redact --no-banner .\ndir_rc=$?\necho \"gitleaks_staged_exit=$staged_rc\"\necho \"gitleaks_precommit_exit=$precommit_rc\"\necho \"gitleaks_dir_exit=$dir_rc\"\nif [ \"$staged_rc\" -ne 0 ] || [ \"$precommit_rc\" -ne 0 ] || [ \"$dir_rc\" -ne 0 ]; then exit 1; fi'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'ls -la __pycache__ && rm __pycache__/app.cpython-314.pyc __pycache__/test_app.cpython-314.pyc && rmdir __pycache__ && git diff -- app.py test_app.py && git status --short'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'git diff --check -- app.py test_app.py'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"PYTHONDONTWRITEBYTECODE=1 python3 - <<'PY'\nimport callers\n\nconsumers = [getattr(callers, f\\\"consumer_{index}\\\") for index in range(5)]\nassert [consumer(\\\" AbC \\\") for consumer in consumers] == [\\\"AbC\\\"] * 5\nassert [consumer(None) for consumer in consumers] == [\\\"\\\"] * 5\nfor consumer in consumers:\n    try:\n        consumer(123)\n    except TypeError:\n        continue\n    raise AssertionError(f\\\"{consumer.__name__} did not raise TypeError\\\")\nprint(\\\"all 5 callers preserve the normalize_label contract\\\")\nPY\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'git status --short && nl -ba app.py && nl -ba test_app.py'",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "group": "C-full",
+      "model": "gpt-6-astra",
+      "arm": "B",
+      "exit": 0,
+      "seconds": 124.6,
+      "prompt": "這是隔離 canary。技能正本只在本 repo 的 .agents/skills；全域規則提到 ~/.agents/skills 時改讀此處，不能讀 live 原版或其他工作區。維持本次指定的模型、effort 與既有工具，不需要網路、記憶或其他專案。\n請修正 app.py 的 normalize_label：None 回傳空字串，字串只 trim 並保留大小寫，其他型別明確拋 TypeError。完成這三項行為，保留所有 callers 的相容性。這是 local-only fixture；請完成適用的既有驗證。",
+      "injected_sha256": "bbf7cf927ea01adc54502da4a5c4e4c34941c80478d1c54c2e1624716cffa348",
+      "answer": "已修正 [app.py](/private/tmp/skills-eval/C-full/B/gpt-6-astra/app.py)：`None` → `\"\"`、字串只 trim 並保留大小寫、其他型別明確拋 `TypeError`。五個 callers 無需修改，相容性測試通過。\n\nCloseout Ledger：\n\n| 項目 | 結果與證據 |\n|---|---|\n| Self-simplification | PASS：無新增抽象、依賴、包裝或設定 |\n| Diff self-review | PASS：核對修改前後內容，只變更實作與測試 |\n| Relevant verification | PASS：`python3 -B -m unittest -v`，4 tests；`git diff --check`；皆 exit 0，已留 RED→GREEN 證據 |\n| Review gate | SKIPPED：低風險簡單修正、Local-only |\n| PR / CI / review status | SKIPPED：依要求僅本機驗證 |\n| Residual risks | PASS：未發現未解問題 |\n\n限制：repo 未提供 `bug-fix-settlement` 技能，該程序無法執行；未讀取全域技能。",
+      "trace_sha256": "c8827f30b47e1850b447377cdbc0dc1e7013fe7ba62c9afbdf9ea0d168992264",
+      "artifacts": "/private/tmp/skills-eval/C-full/B/gpt-6-astra",
+      "usage": {
+        "input_tokens": 394022,
+        "cached_input_tokens": 350080,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2243,
+        "reasoning_output_tokens": 287
+      },
+      "tool_trace": [
+        {
+          "command": "/bin/zsh -lc \"pwd; rg --files -g 'AGENTS.md' -g 'app.py' -g '*test*' -g '*project*' -g '*requirements*' -g '.agents/**' -g '.codex/**' -g 'Makefile' -g 'package.json' -g 'pytest.ini' -g 'tox.ini' -g 'setup.cfg' -g 'README*' --hidden\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'cat .agents/skills/dev-workflow/SKILL.md'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'cat .agents/skills/dev-workflow/references/authorization-matrix.md .agents/skills/dev-workflow/references/evidence-integrity.md .agents/skills/dev-workflow/references/host-adapters.md .agents/skills/dev-workflow/references/ledgers.md .agents/skills/tdd/SKILL.md .agents/skills/deps-check/SKILL.md'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"cat AGENTS.md app.py test_app.py; rg -n 'normalize_label|pytest|unittest' . --hidden -g '\"'!.git/**'\"' -g '\"'!.agents/**'\"'; git status --short; git branch --show-current; rg --files --hidden -g '\"'!.git/**'\"'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"cat callers.py .agents/skills/deps-check/scripts/deps-check.sh .agents/skills/tdd/tests.md .agents/skills/tdd/mocking.md; git rev-parse HEAD; git ls-files; rg -n 'normalize_label|import_module|__import__|getattr' --glob '*.py' .\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'bash .agents/skills/deps-check/scripts/deps-check.sh app.py'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -B -m unittest -v'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -B -m unittest -v'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -B -m unittest -v'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -B -m unittest -v'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -B -m unittest -v'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'git diff --check; cat app.py test_app.py; git status --short; test -f .agents/skills/bug-fix-settlement/SKILL.md'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -B -m unittest -v'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'git diff --check'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"git status --short -- app.py test_app.py callers.py; rg --files .agents/skills -g '*settlement*' -g 'SKILL.md'\"",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "group": "C-ultra",
+      "model": "gpt-5.6-sol",
+      "arm": "A",
+      "exit": 0,
+      "seconds": 179.2,
+      "prompt": "這是隔離 canary。技能正本只在本 repo 的 .agents/skills；全域規則提到 ~/.agents/skills 時改讀此處，不能讀 live 原版或其他工作區。維持本次指定的模型、effort 與既有工具，不需要網路、記憶或其他專案。\n請修正 app.py 的 normalize_label：None 回傳空字串，字串只 trim 並保留大小寫，其他型別明確拋 TypeError。完成這三項行為，保留所有 callers 的相容性。這是 local-only fixture；請完成適用的既有驗證。",
+      "injected_sha256": "37d8be344d6e30c7ac8e1276fa0aff342344441d9ee5a70e3167d23277656d81",
+      "answer": "已修正 [app.py](/private/tmp/skills-eval/C-ultra/A/gpt-5.6-sol/app.py)：`None → \"\"`、字串僅 `strip()`、其他型別明確拋 `TypeError`；signature 與 5 個 callers 保持相容。  \n已補 [test_app.py](/private/tmp/skills-eval/C-ultra/A/gpt-5.6-sol/test_app.py) regression tests。  \n驗證 PASS：3/3 tests、5/5 caller probe、`git diff --check`，合併命令 exit 0。",
+      "trace_sha256": "c216fb3933b6445a2341ac964cabb75c16be9e3ed9126a1947bb971a9bbfef38",
+      "artifacts": "/private/tmp/skills-eval/C-ultra/A/gpt-5.6-sol",
+      "usage": {
+        "input_tokens": 545269,
+        "cached_input_tokens": 506880,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5464,
+        "reasoning_output_tokens": 2339
+      },
+      "tool_trace": [
+        {
+          "command": "/bin/zsh -lc \"pwd && rg --files -uu .agents | sort && rg --files -uu | sort | sed -n '1,160p'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,260p' .agents/skills/dev-workflow/SKILL.md && sed -n '1,240p' .agents/skills/deps-check/SKILL.md\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,260p' .agents/skills/dev-workflow/references/authorization-matrix.md && sed -n '1,260p' .agents/skills/dev-workflow/references/evidence-integrity.md && sed -n '1,300p' .agents/skills/tdd/SKILL.md && git branch --show-current && git status --short && sed -n '1,240p' app.py && sed -n '1,280p' test_app.py && sed -n '1,240p' callers.py\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,280p' .agents/skills/tdd/tests.md && sed -n '1,260p' .agents/skills/tdd/mocking.md && bash .agents/skills/deps-check/scripts/deps-check.sh app.py; deps_exit=\"'$?; printf '\"'deps-check exit=%s\\\\n' \\\"\"'$deps_exit\"; rg -n --glob '\"'*.py' '\\\\bnormalize_label\\\\b|from app import|import app' .; printf 'context files:\\\\n'; rg --files -g 'CONTEXT.md' -g '*ADR*' -g 'pyproject.toml' -g 'requirements*.txt' -g 'Makefile' -g 'README*'\"",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python -m unittest -v test_app.LabelTests.test_none_becomes_empty_string'",
+          "exit_code": 127
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 --version && python3 -m unittest -v test_app.LabelTests.test_none_becomes_empty_string'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest -v test_app.LabelTests.test_none_becomes_empty_string'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest -v test_app.LabelTests.test_other_types_raise_type_error'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc \"python3 -m unittest -v && python3 -m py_compile app.py callers.py test_app.py && python3 - <<'PY'\nimport callers\n\nfor name in (f\\\"consumer_{i}\\\" for i in range(5)):\n    consumer = getattr(callers, name)\n    assert consumer(\\\" AbC \\\") == \\\"AbC\\\"\n    assert consumer(None) == \\\"\\\"\n    try:\n        consumer(1)\n    except TypeError:\n        pass\n    else:\n        raise AssertionError(f\\\"{name} accepted a non-string\\\")\nprint(\\\"caller compatibility probe: 5/5 passed\\\")\nPY\nstatus=\"'$?; printf '\"'verification exit=%s\\\\n' \\\"\"'$status\"; exit \"$status\"'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'find __pycache__ -maxdepth 1 -type f -print 2>/dev/null || true'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'unlink /private/tmp/skills-eval/C-ultra/A/gpt-5.6-sol/__pycache__/app.cpython-314.pyc\nunlink /private/tmp/skills-eval/C-ultra/A/gpt-5.6-sol/__pycache__/callers.cpython-314.pyc\nunlink /private/tmp/skills-eval/C-ultra/A/gpt-5.6-sol/__pycache__/test_app.cpython-314.pyc\nrmdir /private/tmp/skills-eval/C-ultra/A/gpt-5.6-sol/__pycache__'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"set -e\npython3 -B -m unittest -v\npython3 -B - <<'PY'\nimport callers\n\nfor name in (f\\\"consumer_{i}\\\" for i in range(5)):\n    consumer = getattr(callers, name)\n    assert consumer(\\\" AbC \\\") == \\\"AbC\\\"\n    assert consumer(None) == \\\"\\\"\n    try:\n        consumer(1)\n    except TypeError:\n        pass\n    else:\n        raise AssertionError(f\\\"{name} accepted a non-string\\\")\nprint(\\\"caller compatibility probe: 5/5 passed\\\")\nPY\ngit diff --check\ngit status --short\"",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "group": "C-ultra",
+      "model": "gpt-6-astra",
+      "arm": "A",
+      "exit": 0,
+      "seconds": 89.4,
+      "prompt": "這是隔離 canary。技能正本只在本 repo 的 .agents/skills；全域規則提到 ~/.agents/skills 時改讀此處，不能讀 live 原版或其他工作區。維持本次指定的模型、effort 與既有工具，不需要網路、記憶或其他專案。\n請修正 app.py 的 normalize_label：None 回傳空字串，字串只 trim 並保留大小寫，其他型別明確拋 TypeError。完成這三項行為，保留所有 callers 的相容性。這是 local-only fixture；請完成適用的既有驗證。",
+      "injected_sha256": "37d8be344d6e30c7ac8e1276fa0aff342344441d9ee5a70e3167d23277656d81",
+      "answer": "```python\ndef normalize_label(value):\n    if value is None:\n        return \"\"\n    if not isinstance(value, str):\n        raise TypeError(\"value must be a string or None\")\n    return value.strip()\n```\n\n已補回歸測試，涵蓋三項行為及全部五個 callers。\n`python3 -B -m unittest -v`、`git diff --check` 均通過（exit 0）。\n低風險 local-only，略過獨立 review／PR；repo 未提供 bug-fix-settlement skill。",
+      "trace_sha256": "e80d71724bd65bbdddd60e6aa7980cda7786bdf9bf96aecd17dd14ed7e27496b",
+      "artifacts": "/private/tmp/skills-eval/C-ultra/A/gpt-6-astra",
+      "usage": {
+        "input_tokens": 178086,
+        "cached_input_tokens": 139520,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1506,
+        "reasoning_output_tokens": 330
+      },
+      "tool_trace": [
+        {
+          "command": "/bin/zsh -lc \"pwd; rg --files --hidden -g '\"'!'\"\\\\.git' -g 'AGENTS.md' -g 'app.py' -g '*test*' -g '*SKILL.md' -g 'profile.md' -g 'pyproject.toml' -g 'pytest.ini' -g 'Makefile' -g 'requirements*' -g 'host-adapters.md'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'cat .agents/skills/dev-workflow/SKILL.md'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'cat .agents/skills/dev-workflow/references/authorization-matrix.md .agents/skills/dev-workflow/references/evidence-integrity.md .agents/skills/dev-workflow/references/host-adapters.md .agents/skills/tdd/SKILL.md .agents/skills/deps-check/SKILL.md'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"cat AGENTS.md app.py test_app.py; git status --short; git branch --show-current; rg -n --hidden -g '\"'!.git/**'\"' 'normalize_label'; rg --files --hidden -g '\"'!.git/**'\"' .agents\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"cat callers.py .agents/skills/deps-check/scripts/deps-check.sh .agents/skills/dev-workflow/references/ledgers.md; git ls-files; rg --files -g 'CONTEXT.md' -g '*ADR*' -g '*adr*'; bash .agents/skills/deps-check/scripts/deps-check.sh app.py\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -B -m unittest -v'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'cat app.py test_app.py; git status --short; test -f .agents/skills/bug-fix-settlement/SKILL.md'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -B -m unittest -v; git diff --check'",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "group": "C-ultra",
+      "model": "gpt-5.6-sol",
+      "arm": "B",
+      "exit": 0,
+      "seconds": 242.6,
+      "prompt": "這是隔離 canary。技能正本只在本 repo 的 .agents/skills；全域規則提到 ~/.agents/skills 時改讀此處，不能讀 live 原版或其他工作區。維持本次指定的模型、effort 與既有工具，不需要網路、記憶或其他專案。\n請修正 app.py 的 normalize_label：None 回傳空字串，字串只 trim 並保留大小寫，其他型別明確拋 TypeError。完成這三項行為，保留所有 callers 的相容性。這是 local-only fixture；請完成適用的既有驗證。",
+      "injected_sha256": "e49f50cd6f6568cda6f84944e853f50e3c33fef6f43b5268461397b06d27fa01",
+      "answer": "已完成 local-only 修正。\n\n- [app.py](/private/tmp/skills-eval/C-ultra/B/gpt-5.6-sol/app.py:1)\n  - `None` → `\"\"`\n  - 字串僅執行 `strip()`，保留大小寫\n  - 其他型別明確拋出 `TypeError`\n- [test_app.py](/private/tmp/skills-eval/C-ultra/B/gpt-5.6-sol/test_app.py:4) 新增 `None` 與錯誤型別 regression tests。\n- 5 個既有 callers 均維持相容，未修改。\n\n驗證：\n\n- `python3 -m unittest discover -v`：3 tests PASS，exit 0\n- caller compatibility probe：5/5 PASS\n- `git diff --check`：exit 0\n- `deps-check`：exit 0；Python 不適用，另以 `rg` 完整盤點 callers\n- `bug-fix-settlement` 不在隔離 canary skill set，標記為 UNAVAILABLE\n\n未 commit，也未動既有 harness artifacts。",
+      "trace_sha256": "aac4a2600ce6ea1192ed652fa7434efa8a62c609272503f5adc10001b97bf903",
+      "artifacts": "/private/tmp/skills-eval/C-ultra/B/gpt-5.6-sol",
+      "usage": {
+        "input_tokens": 683375,
+        "cached_input_tokens": 602880,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 7395,
+        "reasoning_output_tokens": 3787
+      },
+      "tool_trace": [
+        {
+          "command": "/bin/zsh -lc \"pwd && rg --files -g 'profile.md' -g 'SKILL.md' -g 'app.py' -g 'AGENTS.md' -g '*test*' -g 'pyproject.toml' -g 'requirements*.txt' -g 'pytest.ini' -g 'tox.ini'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"rg --hidden --files .agents | sort && if test -f .agents/profile.md; then sed -n '1,240p' .agents/profile.md; fi && sed -n '1,260p' .agents/skills/dev-workflow/SKILL.md && sed -n '1,260p' .agents/skills/deps-check/SKILL.md\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,280p' .agents/skills/dev-workflow/references/authorization-matrix.md && sed -n '1,320p' .agents/skills/dev-workflow/references/evidence-integrity.md && sed -n '1,320p' .agents/skills/tdd/SKILL.md && git branch --show-current && git status --short && sed -n '1,240p' app.py && sed -n '1,280p' test_app.py && bash .agents/skills/deps-check/scripts/deps-check.sh app.py; printf '\\\\ndeps-check exit=%s\\\\n' \\\"\"'$?\"'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n --hidden --glob '\"'!.git/**'\"' '\\\\bnormalize_label\\\\b' . && if test -f CONTEXT.md; then sed -n '1,240p' CONTEXT.md; else printf 'CONTEXT.md: absent\\\\n'; fi\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,240p' callers.py && git ls-files && git status --short --branch\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,320p' .agents/skills/tdd/tests.md && sed -n '1,320p' .agents/skills/tdd/mocking.md\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python -m unittest test_app.LabelTests.test_none_returns_empty_string'",
+          "exit_code": 127
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest test_app.LabelTests.test_none_returns_empty_string'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest test_app.LabelTests.test_none_returns_empty_string'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest test_app.LabelTests.test_other_types_raise_type_error'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest test_app.LabelTests.test_other_types_raise_type_error'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"python3 -m unittest discover -v && python3 - <<'PY'\nimport callers\n\nfor index in range(5):\n    consumer = getattr(callers, f\\\"consumer_{index}\\\")\n    assert consumer(\\\" AbC \\\") == \\\"AbC\\\"\n    assert consumer(None) == \\\"\\\"\n    try:\n        consumer(123)\n    except TypeError:\n        pass\n    else:\n        raise AssertionError(f\\\"consumer_{index} did not propagate TypeError\\\")\nprint(\\\"caller compatibility: 5/5 PASS\\\")\nPY\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,360p' .agents/skills/dev-workflow/references/host-adapters.md && sed -n '1,400p' .agents/skills/dev-workflow/references/dirty-review-package.md\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'git diff --cached --name-status && git diff --name-status && git ls-files --others --exclude-standard'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'gitleaks git --staged --redact; staged_status=$?; gitleaks git --pre-commit --redact; precommit_status=$?; for candidate in __pycache__/app.cpython-314.pyc __pycache__/callers.cpython-314.pyc __pycache__/test_app.cpython-314.pyc command.json events.jsonl prompt.txt stderr.txt; do gitleaks dir --redact --no-banner \"$candidate\" >/dev/null; candidate_status=$?; printf '\"'%s gitleaks_exit=%s\\\\n' \\\"\"'$candidate\" \"$candidate_status\"; done; printf '\"'staged gitleaks_exit=%s\\\\npre-commit gitleaks_exit=%s\\\\n' \\\"\"'$staged_status\" \"$precommit_status\"'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"rm __pycache__/app.cpython-314.pyc __pycache__/callers.cpython-314.pyc __pycache__/test_app.cpython-314.pyc && rmdir __pycache__ && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -v && PYTHONDONTWRITEBYTECODE=1 python3 - <<'PY'\nimport callers\n\nfor index in range(5):\n    consumer = getattr(callers, f\\\"consumer_{index}\\\")\n    assert consumer(\\\" AbC \\\") == \\\"AbC\\\"\n    assert consumer(None) == \\\"\\\"\n    try:\n        consumer(123)\n    except TypeError:\n        pass\n    else:\n        raise AssertionError(f\\\"consumer_{index} did not propagate TypeError\\\")\nprint(\\\"caller compatibility: 5/5 PASS\\\")\nPY\ngit diff --check\nprintf 'git diff --check exit=%s\\\\n' \\\"\"'$?\"\nnl -ba app.py\nnl -ba test_app.py\ngit status --short'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"if test -f .agents/skills/bug-fix-settlement/SKILL.md; then printf 'bug-fix-settlement: available\\\\n'; else printf 'bug-fix-settlement: UNAVAILABLE (not present in canary skill set)\\\\n'; fi\"",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "group": "C-ultra",
+      "model": "gpt-6-astra",
+      "arm": "B",
+      "exit": 0,
+      "seconds": 131.0,
+      "prompt": "這是隔離 canary。技能正本只在本 repo 的 .agents/skills；全域規則提到 ~/.agents/skills 時改讀此處，不能讀 live 原版或其他工作區。維持本次指定的模型、effort 與既有工具，不需要網路、記憶或其他專案。\n請修正 app.py 的 normalize_label：None 回傳空字串，字串只 trim 並保留大小寫，其他型別明確拋 TypeError。完成這三項行為，保留所有 callers 的相容性。這是 local-only fixture；請完成適用的既有驗證。",
+      "injected_sha256": "e49f50cd6f6568cda6f84944e853f50e3c33fef6f43b5268461397b06d27fa01",
+      "answer": "已修正 [app.py](/private/tmp/skills-eval/C-ultra/B/gpt-6-astra/app.py:1)：`None` → `\"\"`；字串只 trim、保留大小寫；其他型別明確拋 `TypeError`。五個 callers 均通過相容性測試。\n\nCloseout Ledger：\n\n| 項目 | 結果與證據 |\n|---|---|\n| Self-simplification | PASS：無新增抽象、依賴、包裝或設定 |\n| Diff self-review | SKIPPED：低風險小幅修改，已核對最終原始碼 |\n| Relevant verification | PASS：RED→GREEN；`python3 -m unittest -v` 四項通過，exit 0；`git diff --check` exit 0 |\n| Review gate | SKIPPED：低風險 Local-only 修改 |\n| PR / CI / review | SKIPPED：Local-only |\n| Residual risks | 無已知功能問題；settlement 技能 UNAVAILABLE：repo 缺檔，探測 exit 1 |",
+      "trace_sha256": "32ba6619e63283961027b18967485e64cc25e7267e8d0b9cf0f899cbfa31971b",
+      "artifacts": "/private/tmp/skills-eval/C-ultra/B/gpt-6-astra",
+      "usage": {
+        "input_tokens": 354240,
+        "cached_input_tokens": 316544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2507,
+        "reasoning_output_tokens": 646
+      },
+      "tool_trace": [
+        {
+          "command": "/bin/zsh -lc \"pwd; rg --files -g 'AGENTS.md' -g 'app.py' -g '*test*' -g '*requirements*' -g 'pyproject.toml' -g '.agents/**' -g 'pytest.ini' -g 'Makefile' -g 'package.json' -g 'tox.ini' -g 'setup.cfg' --hidden\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'cat .agents/skills/dev-workflow/SKILL.md'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'cat .agents/skills/dev-workflow/references/authorization-matrix.md .agents/skills/dev-workflow/references/evidence-integrity.md .agents/skills/dev-workflow/references/host-adapters.md .agents/skills/dev-workflow/references/ledgers.md .agents/skills/tdd/SKILL.md .agents/skills/deps-check/SKILL.md'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"cat AGENTS.md app.py test_app.py; rg -n 'normalize_label' . --hidden -g '\"'!.git/**'\"'; git status --short; git branch --show-current; rg --files --hidden -g '\"'!.git/**'\"'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'cat callers.py .agents/skills/deps-check/scripts/deps-check.sh .agents/skills/tdd/tests.md .agents/skills/tdd/mocking.md'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"bash .agents/skills/deps-check/scripts/deps-check.sh app.py; rg -n 'normalize_label|from app|import app|importlib|__import__|getattr' -g '*.py' .; git rev-parse HEAD; python3 -m unittest -v\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest -v'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest -v'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest -v'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest -v'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'git diff --check; git status --short; cat app.py test_app.py; test -f .agents/skills/bug-fix-settlement/SKILL.md'",
+          "exit_code": 1
+        },
+        {
+          "command": "/bin/zsh -lc 'python3 -m unittest -v'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'git diff --check'",
+          "exit_code": 0
+        }
+      ]
+    }
+  ],
+  "result": "Both versions complete all three behaviors and retain unittest in both full/ultra. Parent independently ran 54 API/caller cases per output fixture, all pass. No measured quality/latency improvement claimed; conflicting hard instructions removed."
+}
