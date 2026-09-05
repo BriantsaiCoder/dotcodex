@@ -120,6 +120,10 @@ for cap_anchor in '程序只由該 skill 維護' 'MUST 一次執行至完成' '�
   grep -Fq -- "$cap_anchor" AGENTS.md || fail "capability parity anchor missing: $cap_anchor"
 done
 
+# 僅驗 policy anchor；不涵蓋模型實際沿用／重讀行為。
+grep -Fqx '[T0-10] dev MUST 套用 ponytail；目前 context 已有同版本完整指令則沿用，否則 invoke；ponytail=通用慣例；test:[T0-2]/dev-workflow [INT-2].' AGENTS.md ||
+  fail 'Ponytail reuse must require complete current-context instructions of the same version'
+
 for id in T0-1 T0-5 T0-7 T0-8 T0-9; do
   [ "$(grep -Ec "^\\[$id\\]" AGENTS.md)" -eq 1 ] ||
     fail "[$id] must have exactly one definition"
