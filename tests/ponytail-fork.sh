@@ -20,7 +20,9 @@ text=(root/'skills/ponytail/SKILL.md').read_text()
 assert 'at most three short lines' not in text
 assert 'No frameworks, no' not in text
 assert 'Complete all requested behavior' in text
-print('PASS: exact two-file Ponytail patch and complete-scope contract')
+exposure=json.loads((pathlib.Path(sys.argv[2]).parent/'exposure.json').read_text())
+assert 'ponytail:ponytail-review' not in exposure['disable_names'], 'review mode requires the ponytail-review skill'
+print('PASS: exact patch, complete scope and retained review-mode skill')
 PY
 node --check "$probe/hooks/ponytail-instructions.js"
 (cd "$probe" && git apply --reverse --check "$fork/ponytail.patch" && git apply --reverse "$fork/ponytail.patch")
