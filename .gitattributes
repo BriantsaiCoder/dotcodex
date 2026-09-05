@@ -1,0 +1,2 @@
+# Unified patch context uses a single space for empty lines.
+maintenance/ponytail/ponytail.patch -whitespace
